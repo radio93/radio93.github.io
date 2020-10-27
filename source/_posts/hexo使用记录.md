@@ -53,7 +53,7 @@ $ npm install hexo-server --save
 $ hexo generate
 #尝试启动博客 默认端口4000
 $ hexo server
-如果端口冲突 可以修改端口
+#如果端口冲突 可以修改端口
 $ hexo server -p 5000
 
 ```
@@ -62,7 +62,7 @@ $ hexo server -p 5000
 
 ###### 	如果radio93.github.io无法访问，需要修改此处，博客主页在main下的index.html
 
-![](image-20201027162208507.png)
+![](https://radio93.oss-cn-beijing.aliyuncs.com/gitbub/image-20201027162208507.png?x-oss-process=style/radio93)
 
 
 
@@ -70,7 +70,7 @@ $ hexo server -p 5000
 
 ###### 	项目名称需要和github名称保持一致
 
-![](hexo使用记录/image-20201027162349781.png)
+![](https://radio93.oss-cn-beijing.aliyuncs.com/gitbub/image-20201027162349781.png?x-oss-process=style/radio93)
 
 
 
