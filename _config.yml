@@ -3,12 +3,12 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle: ''
-description: ''
+title: Radio
+subtitle: '一个小小程序员'
+description: '千门明月，天如水，正是人间佳节。开尽小梅春气透，花烛家家罗列。来往绮罗，喧阗箫鼓，达旦何曾歇。少年当此，风光真是殊绝。'
 keywords:
-author: John Doe
-language: en
+author: radio
+language: zh-CN
 timezone: ''
 
 # URL
@@ -95,10 +95,17 @@ include:
 exclude:
 ignore:
 
+
+search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000
+
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: next
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
@@ -106,3 +113,9 @@ deploy:
   type: git
   repo: git@github.com:radio93/radio93.github.io.git
   branch: main
+  
+# hexo-admin authentification
+admin:
+  username: 1301931069@qq.com
+  password_hash: $2a$10$xGl0qr6KI05LnlXKkkPBvOrWIamxJC8D4Aaco71gUH7RAQd4zDTbG
+  secret: jiangpeng
