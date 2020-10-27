@@ -20,7 +20,9 @@ $$+Enter 公式
 
 ```bash
 $ hexo new 新博客名字
+#编译md文件为静态页面
 $ hexo generate
+#推送public文件夹到main，github收到main发生变化，会自动重启，需要等待一会
 $ hexo deploy
 
 $ hexo new page "页面名称"
@@ -56,11 +58,19 @@ $ hexo server -p 5000
 
 ```
 
+##### 常见问题
+
+###### 	如果radio93.github.io无法访问，需要修改此处，博客主页在main下的index.html
+
+![](image-20201027162208507.png)
 
 
 
 
 
+###### 	项目名称需要和github名称保持一致
+
+![](hexo使用记录/image-20201027162349781.png)
 
 
 
