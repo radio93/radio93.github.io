@@ -42,6 +42,20 @@ git push origin source
 
 ##### 新环境博客维护
 
+```bash
+#从git上的source分支down下来的源码
+$ cd 项目
+#Hexo 3.0 把服务器独立成了个别模块，必须先安装 hexo-server 才能使用
+$ npm install hexo-server --save
+#编译博客源码为静态页面
+$ hexo generate
+#尝试启动博客 默认端口4000
+$ hexo server
+如果端口冲突 可以修改端口
+$ hexo server -p 5000
+
+```
+
 
 
 

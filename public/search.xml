@@ -30,7 +30,17 @@
 
 
 
-<h5 id="新环境博客维护"><a href="#新环境博客维护" class="headerlink" title="新环境博客维护"></a>新环境博客维护</h5>]]></content>
+<h5 id="新环境博客维护"><a href="#新环境博客维护" class="headerlink" title="新环境博客维护"></a>新环境博客维护</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#从git上的source分支down下来的源码</span></span><br><span class="line">$ <span class="built_in">cd</span> 项目</span><br><span class="line"><span class="comment">#Hexo 3.0 把服务器独立成了个别模块，必须先安装 hexo-server 才能使用</span></span><br><span class="line">$ npm install hexo-server --save</span><br><span class="line"><span class="comment">#编译博客源码为静态页面</span></span><br><span class="line">$ hexo generate</span><br><span class="line"><span class="comment">#尝试启动博客 默认端口4000</span></span><br><span class="line">$ hexo server</span><br><span class="line">如果端口冲突 可以修改端口</span><br><span class="line">$ hexo server -p 5000</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+]]></content>
       <categories>
         <category>文档操作</category>
         <category>hexo</category>
