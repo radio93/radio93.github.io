@@ -20,12 +20,17 @@
   </entry>
   <entry>
     <title>hexo使用记录</title>
-    <url>/2020/10/27/hello-world-1/</url>
+    <url>/2020/10/27/hexo%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<h5 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Ctrl+B对选中字体加粗</span><br><span class="line">$$+Enter 公式</span><br></pre></td></tr></table></figure>
 
 <h5 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a><a href="https://hexo.io/zh-cn/docs/">Hexo</a></h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new 新博客名字</span><br><span class="line">$ hexo generate</span><br><span class="line">$ hexo deploy</span><br><span class="line"></span><br><span class="line">$ hexo new page <span class="string">&quot;页面名称&quot;</span></span><br></pre></td></tr></table></figure>
 
-]]></content>
+<p>source源码维护，方便不同计算机维护博客</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">更新本地源码到<span class="built_in">source</span></span><br><span class="line">git init</span><br><span class="line">git checkout -b <span class="built_in">source</span></span><br><span class="line">git add -A</span><br><span class="line">git commit -m <span class="string">&quot;init blog&quot;</span></span><br><span class="line">git remote add origin git@github.com:radio93/radio93.github.io.git</span><br><span class="line">git push origin <span class="built_in">source</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="新环境博客维护"><a href="#新环境博客维护" class="headerlink" title="新环境博客维护"></a>新环境博客维护</h5>]]></content>
       <categories>
         <category>文档操作</category>
         <category>hexo</category>

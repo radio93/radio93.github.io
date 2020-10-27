@@ -26,3 +26,27 @@ $ hexo deploy
 $ hexo new page "页面名称"
 ```
 
+source源码维护，方便不同计算机维护博客
+
+```bash
+更新本地源码到source
+git init
+git checkout -b source
+git add -A
+git commit -m "init blog"
+git remote add origin git@github.com:radio93/radio93.github.io.git
+git push origin source
+```
+
+
+
+##### 新环境博客维护
+
+
+
+
+
+
+
+
+
