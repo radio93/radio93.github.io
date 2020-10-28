@@ -24,8 +24,11 @@ $ hexo new 新博客名字
 $ hexo generate
 #推送public文件夹到main，github收到main发生变化，会自动重启，需要等待一会
 $ hexo deploy
+#编辑+部署
+$ hexo g -d
 
 $ hexo new page "页面名称"
+
 ```
 
 source源码维护，方便不同计算机维护博客
@@ -73,4 +76,40 @@ $ hexo server -p 5000
 ![](https://radio93.oss-cn-beijing.aliyuncs.com/gitbub/image-20201027162349781.png?x-oss-process=style/radio93)
 
 
+
+###### 如果Gitalk控制台总是报错，可以查看下\themes\next\layout\_third-party\comments\gitalk.swig中的链接是否最新，因为原域名已被更新
+
+gitalk.swig源码如下：
+
+```js
+{%- if page.comments %}
+{%- set gitalk_css_uri = theme.vendors.gitalk_css or 'https://unpkg.com/gitalk/dist/gitalk.css' %}
+<link rel="stylesheet" href="{{ gitalk_css_uri }}">
+
+{%- set gitalk_js_uri = theme.vendors.gitalk_js or 'https://unpkg.com/gitalk/dist/gitalk.min.js' %}
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('{{ gitalk_js_uri }}', () => {
+    var gitalk = new Gitalk({
+      clientID    : '{{ theme.gitalk.client_id }}',
+      clientSecret: '{{ theme.gitalk.client_secret }}',
+      repo        : '{{ theme.gitalk.repo }}',
+      owner       : '{{ theme.gitalk.github_id }}',
+      admin       : ['{{ theme.gitalk.admin_user }}'],
+      id          : '{{ gitalk_md5(page.path) }}',
+      {%- if theme.gitalk.language == '' %}
+        language: window.navigator.language || window.navigator.userLanguage,
+      {% else %}
+        language: '{{ theme.gitalk.language }}',
+      {%- endif %}
+      distractionFreeMode: {{ theme.gitalk.distraction_free_mode }}
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+{%- endif %}
+
+```
 
