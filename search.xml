@@ -403,7 +403,7 @@
 <p>这种模式涉及到一个单一的类，该类负责加入独立的或不兼容的接口功能。</p>
 </blockquote>
 <h5 id="示例演示："><a href="#示例演示：" class="headerlink" title="示例演示："></a>示例演示：</h5><ol>
-<li><p>由于我们之前的例子都是围绕people和animal来的，所以我们依然用people来举例，例子可能不太恰当，网上有更好的例子；这次我们把people涉及成一个接口，这个接口提供了一个eat的方法，方法有两个参数，什么类型的食物，和食物名称</p>
+<li><p>由于我们之前的例子都是围绕people和animal来的，所以我们依然用people来举例，例子可能不太恰当，网上有更好的例子；这次我们把people设计成一个接口，这个接口提供了一个eat的方法，方法有两个参数，什么类型的食物，和食物名称</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> test.adapter;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">People</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">eat</span><span class="params">(String type, String name)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>这时候我们新增两个接口，一个吃荤，一个吃素</p>
