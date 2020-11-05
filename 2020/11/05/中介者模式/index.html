@@ -20,17 +20,21 @@
     var CONFIG = {"hostname":"radio93.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="千门明月，天如水，正是人间佳节。开尽小梅春气透，花烛家家罗列。来往绮罗，喧阗箫鼓，达旦何曾歇。少年当此，风光真是殊绝。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Radio">
-<meta property="og:url" content="https://radio93.github.io/categories/%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C/hexo/index.html">
+  <meta name="description" content="中介者模式 中介者模式（Mediator Pattern）是用来降低多个对象和类之间的通信复杂性。这种模式提供了一个中介类，该类通常处理不同类之间的通信，并支持松耦合， 使代码易于维护。中介者模式属于行为型模式。  示例演示： 创建一个people类，并将其中的say方法单独提取 12345678910111213141516package test.mediator;import lombok.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="中介者模式">
+<meta property="og:url" content="https://radio93.github.io/2020/11/05/%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F/index.html">
 <meta property="og:site_name" content="Radio">
-<meta property="og:description" content="千门明月，天如水，正是人间佳节。开尽小梅春气透，花烛家家罗列。来往绮罗，喧阗箫鼓，达旦何曾歇。少年当此，风光真是殊绝。">
+<meta property="og:description" content="中介者模式 中介者模式（Mediator Pattern）是用来降低多个对象和类之间的通信复杂性。这种模式提供了一个中介类，该类通常处理不同类之间的通信，并支持松耦合， 使代码易于维护。中介者模式属于行为型模式。  示例演示： 创建一个people类，并将其中的say方法单独提取 12345678910111213141516package test.mediator;import lombok.">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-11-05T05:23:25.000Z">
+<meta property="article:modified_time" content="2020-11-05T05:27:08.256Z">
 <meta property="article:author" content="radio">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="设计模式">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://radio93.github.io/categories/%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C/hexo/">
+<link rel="canonical" href="https://radio93.github.io/2020/11/05/%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F/">
 
 
 <script id="page-configurations">
@@ -38,12 +42,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>分类: hexo | Radio</title>
+  <title>中介者模式 | Radio</title>
   
 
 
@@ -179,57 +183,134 @@
         <div class="content-wrap">
           
 
-          <div class="content category">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">hexo
-          <small>分类</small>
-        </h2>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://radio93.github.io/2020/11/05/%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="radio">
+      <meta itemprop="description" content="千门明月，天如水，正是人间佳节。开尽小梅春气透，花烛家家罗列。来往绮罗，喧阗箫鼓，达旦何曾歇。少年当此，风光真是殊绝。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Radio">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          中介者模式
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-11-05 13:23:25 / 修改时间：13:27:08" itemprop="dateCreated datePublished" datetime="2020-11-05T13:23:25+08:00">2020-11-05</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2020</span>
+        <h1 id="中介者模式"><a href="#中介者模式" class="headerlink" title="中介者模式"></a>中介者模式</h1><blockquote>
+<p>中介者模式（Mediator Pattern）是用来降低多个对象和类之间的通信复杂性。这种模式提供了一个中介类，该类通常处理不同类之间的通信，并支持松耦合， 使代码易于维护。中介者模式属于行为型模式。</p>
+</blockquote>
+<h5 id="示例演示："><a href="#示例演示：" class="headerlink" title="示例演示："></a>示例演示：</h5><ol>
+<li><p>创建一个people类，并将其中的say方法单独提取</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test.mediator;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">People</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">People</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">say</span><span class="params">(String message)</span> </span>&#123;</span><br><span class="line">        Say.say(<span class="keyword">this</span>, message);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test.mediator;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Say</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">say</span><span class="params">(People people, String message)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="keyword">new</span> Date().toString() + <span class="string">&quot; [&quot;</span> + people.getName() + <span class="string">&quot;]:&quot;</span> + message);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>完成上述步骤，我们就可以开始演示了</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test.mediator;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MediatorDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        People people1 = <span class="keyword">new</span> People(<span class="string">&quot;people1&quot;</span>);</span><br><span class="line">        People people2 = <span class="keyword">new</span> People(<span class="string">&quot;people2&quot;</span>);</span><br><span class="line">        people1.say(<span class="string">&quot;hello1&quot;</span>);</span><br><span class="line">        people2.say(<span class="string">&quot;hello2&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Thu Nov <span class="number">05</span> <span class="number">11</span>:<span class="number">43</span>:<span class="number">05</span> CST <span class="number">2020</span> [people1]:hello1</span><br><span class="line">Thu Nov <span class="number">05</span> <span class="number">11</span>:<span class="number">43</span>:<span class="number">05</span> CST <span class="number">2020</span> [people2]:hello2</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h5 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h5><blockquote>
+<p><strong>优点：</strong> 1、降低了类的复杂度，将一对多转化成了一对一。 2、各个类之间的解耦。 3、符合迪米特原则。</p>
+<p><strong>缺点：</strong>中介者会庞大，变得复杂难以维护。</p>
+</blockquote>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
+        
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-10-27T14:44:00+08:00"
-              content="2020-10-27">
-          10-27
-        </time>
-      </div>
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/10/27/hexo%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/" itemprop="url">
-            <span itemprop="name">hexo使用记录</span>
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
           </a>
-      </div>
-
-    </header>
-  </article>
-
+        </div>
     </div>
   </div>
-  
-  
-  
 
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/java/" rel="tag"># java</a>
+              <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag"># 设计模式</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/11/05/%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/" rel="prev" title="迭代器模式">
+      <i class="fa fa-chevron-left"></i> 迭代器模式
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
   
 
 
 
           </div>
           
+    <div class="comments" id="gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -276,6 +357,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">中介者模式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%E6%BC%94%E7%A4%BA%EF%BC%9A"><span class="nav-number">1.0.0.0.1.</span> <span class="nav-text">示例演示：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%B4%E6%98%8E%EF%BC%9A"><span class="nav-number">1.0.0.0.2.</span> <span class="nav-text">说明：</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -480,6 +562,25 @@ window.addEventListener('pjax:success', () => {
 
   
 
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('https://unpkg.com/gitalk/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'ea0dc187046ba659ee79',
+      clientSecret: 'e4f21670ec8aad455b11223e10da3d0f4298d83d',
+      repo        : 'radio93.github.io',
+      owner       : 'radio93',
+      admin       : ['radio93'],
+      id          : 'dc3e890264ea4a291b55f266a9470952',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
 
     </div>
 </body>

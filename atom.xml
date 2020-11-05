@@ -6,7 +6,7 @@
   <link href="https://radio93.github.io/atom.xml" rel="self"/>
   
   <link href="https://radio93.github.io/"/>
-  <updated>2020-11-05T02:45:58.507Z</updated>
+  <updated>2020-11-05T05:27:08.256Z</updated>
   <id>https://radio93.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>中介者模式</title>
+    <link href="https://radio93.github.io/2020/11/05/%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F/"/>
+    <id>https://radio93.github.io/2020/11/05/%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F/</id>
+    <published>2020-11-05T05:23:25.000Z</published>
+    <updated>2020-11-05T05:27:08.256Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="中介者模式"><a href="#中介者模式" class="headerlink" title="中介者模式"></a>中介者模式</h1><blockquote><p>中介者模式（Mediator Pattern）是用来降低多个对象和类之间的通信复杂性。这种模式提供了一个中介类，该类通常处理不同类之间的通信，并支持松耦合， 使代码易于维护。中介者模式属于行为型模式。</p></blockquote><h5 id="示例演示："><a href="#示例演示：" class="headerlink" title="示例演示："></a>示例演示：</h5><ol><li><p>创建一个people类，并将其中的say方法单独提取</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test.mediator;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">People</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">People</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">say</span><span class="params">(String message)</span> </span>&#123;</span><br><span class="line">        Say.say(<span class="keyword">this</span>, message);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test.mediator;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Say</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">say</span><span class="params">(People people, String message)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="keyword">new</span> Date().toString() + <span class="string">&quot; [&quot;</span> + people.getName() + <span class="string">&quot;]:&quot;</span> + message);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p>完成上述步骤，我们就可以开始演示了</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test.mediator;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MediatorDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        People people1 = <span class="keyword">new</span> People(<span class="string">&quot;people1&quot;</span>);</span><br><span class="line">        People people2 = <span class="keyword">new</span> People(<span class="string">&quot;people2&quot;</span>);</span><br><span class="line">        people1.say(<span class="string">&quot;hello1&quot;</span>);</span><br><span class="line">        people2.say(<span class="string">&quot;hello2&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>运行结果：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Thu Nov <span class="number">05</span> <span class="number">11</span>:<span class="number">43</span>:<span class="number">05</span> CST <span class="number">2020</span> [people1]:hello1</span><br><span class="line">Thu Nov <span class="number">05</span> <span class="number">11</span>:<span class="number">43</span>:<span class="number">05</span> CST <span class="number">2020</span> [people2]:hello2</span><br></pre></td></tr></table></figure></li></ol><h5 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h5><blockquote><p><strong>优点：</strong> 1、降低了类的复杂度，将一对多转化成了一对一。 2、各个类之间的解耦。 3、符合迪米特原则。</p><p><strong>缺点：</strong>中介者会庞大，变得复杂难以维护。</p></blockquote>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;中介者模式&quot;&gt;&lt;a href=&quot;#中介者模式&quot; class=&quot;headerlink&quot; title=&quot;中介者模式&quot;&gt;&lt;/a&gt;中介者模式&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;中介者模式（Mediator Pattern）是用来降低多个对象和类之间的通信复杂性。这种</summary>
+      
+    
+    
+    
+    
+    <category term="java" scheme="https://radio93.github.io/tags/java/"/>
+    
+    <category term="设计模式" scheme="https://radio93.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
   
   <entry>
     <title>迭代器模式</title>
