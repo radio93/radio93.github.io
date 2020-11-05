@@ -20,34 +20,30 @@
     var CONFIG = {"hostname":"radio93.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="组合模式 组合模式（Composite Pattern），又叫部分整体模式，是用于把一组相似的对象当作一个单一的对象。组合模式依据树形结构来组合对象，用来表示部分以及整体层次。这种类型的设计模式属于结构型模式，它创建了对象组的树形结构。 这种模式创建了一个包含自己对象组的类。该类提供了修改相同对象组的方式。  示例演示： 创建一个people实体类，让这个实体类里面依然包含people的对象集合">
-<meta property="og:type" content="article">
-<meta property="og:title" content="组合模式">
-<meta property="og:url" content="https://radio93.github.io/2020/11/03/%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/index.html">
+  <meta name="description" content="千门明月，天如水，正是人间佳节。开尽小梅春气透，花烛家家罗列。来往绮罗，喧阗箫鼓，达旦何曾歇。少年当此，风光真是殊绝。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Radio">
+<meta property="og:url" content="https://radio93.github.io/page/3/index.html">
 <meta property="og:site_name" content="Radio">
-<meta property="og:description" content="组合模式 组合模式（Composite Pattern），又叫部分整体模式，是用于把一组相似的对象当作一个单一的对象。组合模式依据树形结构来组合对象，用来表示部分以及整体层次。这种类型的设计模式属于结构型模式，它创建了对象组的树形结构。 这种模式创建了一个包含自己对象组的类。该类提供了修改相同对象组的方式。  示例演示： 创建一个people实体类，让这个实体类里面依然包含people的对象集合">
+<meta property="og:description" content="千门明月，天如水，正是人间佳节。开尽小梅春气透，花烛家家罗列。来往绮罗，喧阗箫鼓，达旦何曾歇。少年当此，风光真是殊绝。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-11-03T08:38:27.000Z">
-<meta property="article:modified_time" content="2020-11-03T08:46:50.720Z">
 <meta property="article:author" content="radio">
-<meta property="article:tag" content="java">
-<meta property="article:tag" content="设计模式">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://radio93.github.io/2020/11/03/%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/">
+<link rel="canonical" href="https://radio93.github.io/page/3/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : false,
-    isPost : true,
+    isHome : true,
+    isPost : false,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>组合模式 | Radio</title>
+  <title>Radio</title>
   
 
 
@@ -183,14 +179,13 @@
         <div class="content-wrap">
           
 
-          <div class="content post posts-expand">
+          <div class="content index posts-expand">
             
-
-    
+      
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://radio93.github.io/2020/11/03/%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/">
+    <link itemprop="mainEntityOfPage" href="https://radio93.github.io/2020/10/27/hexo%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -202,9 +197,10 @@
       <meta itemprop="name" content="Radio">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          组合模式
-        </h1>
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/10/27/hexo%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">hexo使用记录</a>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -212,19 +208,31 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-11-03 16:38:27 / 修改时间：16:46:50" itemprop="dateCreated datePublished" datetime="2020-11-03T16:38:27+08:00">2020-11-03</time>
+              <time title="创建时间：2020-10-27 14:44:00" itemprop="dateCreated datePublished" datetime="2020-10-27T14:44:00+08:00">2020-10-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-11-02 09:58:19" itemprop="dateModified" datetime="2020-11-02T09:58:19+08:00">2020-11-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C/" itemprop="url" rel="index"><span itemprop="name">文档操作</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a>
+                </span>
             </span>
 
           
-            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span id="busuanzi_value_page_pv"></span>
-            </span>
 
         </div>
       </header>
@@ -235,84 +243,47 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="组合模式"><a href="#组合模式" class="headerlink" title="组合模式"></a>组合模式</h1><blockquote>
-<p>组合模式（Composite Pattern），又叫部分整体模式，是用于把一组相似的对象当作一个单一的对象。组合模式依据树形结构来组合对象，用来表示部分以及整体层次。这种类型的设计模式属于结构型模式，它创建了对象组的树形结构。</p>
-<p>这种模式创建了一个包含自己对象组的类。该类提供了修改相同对象组的方式。</p>
-</blockquote>
-<h5 id="示例演示："><a href="#示例演示：" class="headerlink" title="示例演示："></a>示例演示：</h5><ol>
-<li><p>创建一个people实体类，让这个实体类里面依然包含people的对象集合</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test.composite;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">People</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Integer id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> List&lt;People&gt; peoples;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">People</span><span class="params">(Integer id, String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.id = id;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        peoples = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(People people)</span> </span>&#123;</span><br><span class="line">        peoples.add(people);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>完成上述步骤，我们就可以开始演示了</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test.composite;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CompositeDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">         People people = <span class="keyword">new</span> People(<span class="number">1</span>,<span class="string">&quot;1&quot;</span>);</span><br><span class="line">         People people2 = <span class="keyword">new</span> People(<span class="number">2</span>,<span class="string">&quot;2&quot;</span>);</span><br><span class="line">         People people3 = <span class="keyword">new</span> People(<span class="number">3</span>,<span class="string">&quot;3&quot;</span>);</span><br><span class="line">         People people4 = <span class="keyword">new</span> People(<span class="number">4</span>,<span class="string">&quot;4&quot;</span>);</span><br><span class="line"></span><br><span class="line">        people.add(people2);</span><br><span class="line">        people.add(people3);</span><br><span class="line">        people.add(people4);</span><br><span class="line"></span><br><span class="line">        System.out.println(people.toString());</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <h5 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Ctrl+B对选中字体加粗</span><br><span class="line">$$+Enter 公式</span><br></pre></td></tr></table></figure>
 
-<p>运行结果：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">People(id=<span class="number">1</span>, name=<span class="number">1</span>, peoples=[People(id=<span class="number">2</span>, name=<span class="number">2</span>, peoples=[]), People(id=<span class="number">3</span>, name=<span class="number">3</span>, peoples=[]), People(id=<span class="number">4</span>, name=<span class="number">4</span>, peoples=[])])</span><br></pre></td></tr></table></figure>
+<h5 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a></h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new 新博客名字</span><br><span class="line"><span class="comment">#编译md文件为静态页面</span></span><br><span class="line">$ hexo generate</span><br><span class="line"><span class="comment">#推送public文件夹到main，github收到main发生变化，会自动重启，需要等待一会</span></span><br><span class="line">$ hexo deploy</span><br><span class="line"><span class="comment">#编辑+部署</span></span><br><span class="line">$ hexo g -d</span><br><span class="line"></span><br><span class="line">$ hexo new page <span class="string">&quot;页面名称&quot;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h5 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h5><blockquote>
-<p>1、组合模式，就是在一个对象中包含其他对象，这些被包含的对象可能是终点对象（不再包含别的对象），也有可能是非终点对象（其内部还包含其他对象，或叫组对象），我们将对象称为节点，即一个根节点包含许多子节点，这些子节点有的不再包含子节点，而有的仍然包含子节点，以此类推。</p>
-<p>2、所谓组合模式，其实说的是对象包含对象的问题，通过组合的方式（在对象内部引用对象）来进行布局，我认为这种组合是区别于继承的，而另一层含义是指树形结构子节点的抽象（将叶子节点与数枝节点抽象为子节点），区别于普通的分别定义叶子节点与数枝节点的方式。</p>
-</blockquote>
-</li>
-</ol>
+<p>source源码维护，方便不同计算机维护博客</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">更新本地源码到<span class="built_in">source</span></span><br><span class="line">git init</span><br><span class="line">git checkout -b <span class="built_in">source</span></span><br><span class="line">git add -A</span><br><span class="line">git commit -m <span class="string">&quot;init blog&quot;</span></span><br><span class="line">git remote add origin git@github.com:radio93/radio93.github.io.git</span><br><span class="line">git push origin <span class="built_in">source</span></span><br></pre></td></tr></table></figure>
 
+
+
+<h5 id="新环境博客维护"><a href="#新环境博客维护" class="headerlink" title="新环境博客维护"></a>新环境博客维护</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#从git上的source分支down下来的源码</span></span><br><span class="line">$ <span class="built_in">cd</span> 项目</span><br><span class="line"><span class="comment">#Hexo 3.0 把服务器独立成了个别模块，必须先安装 hexo-server 才能使用</span></span><br><span class="line">$ npm install hexo-server --save</span><br><span class="line"><span class="comment">#编译博客源码为静态页面</span></span><br><span class="line">$ hexo generate</span><br><span class="line"><span class="comment">#尝试启动博客 默认端口4000</span></span><br><span class="line">$ hexo server</span><br><span class="line"><span class="comment">#如果端口冲突 可以修改端口</span></span><br><span class="line">$ hexo server -p 5000</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h5><h6 id="如果radio93-github-io无法访问，需要修改此处，博客主页在main下的index-html"><a href="#如果radio93-github-io无法访问，需要修改此处，博客主页在main下的index-html" class="headerlink" title="如果radio93.github.io无法访问，需要修改此处，博客主页在main下的index.html"></a>如果radio93.github.io无法访问，需要修改此处，博客主页在main下的index.html</h6><p><img src="https://radio93.oss-cn-beijing.aliyuncs.com/gitbub/image-20201027162208507.png?x-oss-process=style/radio93"></p>
+<h6 id="项目名称需要和github名称保持一致"><a href="#项目名称需要和github名称保持一致" class="headerlink" title="项目名称需要和github名称保持一致"></a>项目名称需要和github名称保持一致</h6><p><img src="https://radio93.oss-cn-beijing.aliyuncs.com/gitbub/image-20201027162349781.png?x-oss-process=style/radio93"></p>
+<h6 id="如果Gitalk控制台总是报错，可以查看下-themes-next-layout-third-party-comments-gitalk-swig中的链接是否最新，因为原域名已被更新"><a href="#如果Gitalk控制台总是报错，可以查看下-themes-next-layout-third-party-comments-gitalk-swig中的链接是否最新，因为原域名已被更新" class="headerlink" title="如果Gitalk控制台总是报错，可以查看下\themes\next\layout_third-party\comments\gitalk.swig中的链接是否最新，因为原域名已被更新"></a>如果Gitalk控制台总是报错，可以查看下\themes\next\layout_third-party\comments\gitalk.swig中的链接是否最新，因为原域名已被更新</h6><p>gitalk.swig源码如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&#123;%- <span class="keyword">if</span> page.comments %&#125;</span><br><span class="line">&#123;%- set gitalk_css_uri = theme.vendors.gitalk_css or <span class="string">&#x27;https://unpkg.com/gitalk/dist/gitalk.css&#x27;</span> %&#125;</span><br><span class="line">&lt;link rel=<span class="string">&quot;stylesheet&quot;</span> href=<span class="string">&quot;&#123;&#123; gitalk_css_uri &#125;&#125;&quot;</span>&gt;</span><br><span class="line"></span><br><span class="line">&#123;%- set gitalk_js_uri = theme.vendors.gitalk_js or <span class="string">&#x27;https://unpkg.com/gitalk/dist/gitalk.min.js&#x27;</span> %&#125;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">NexT.utils.loadComments(<span class="built_in">document</span>.querySelector(<span class="string">&#x27;#gitalk-container&#x27;</span>), <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  NexT.utils.getScript(<span class="string">&#x27;&#123;&#123; gitalk_js_uri &#125;&#125;&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> gitalk = <span class="keyword">new</span> Gitalk(&#123;</span><br><span class="line">      clientID    : <span class="string">&#x27;&#123;&#123; theme.gitalk.client_id &#125;&#125;&#x27;</span>,</span><br><span class="line">      clientSecret: <span class="string">&#x27;&#123;&#123; theme.gitalk.client_secret &#125;&#125;&#x27;</span>,</span><br><span class="line">      repo        : <span class="string">&#x27;&#123;&#123; theme.gitalk.repo &#125;&#125;&#x27;</span>,</span><br><span class="line">      owner       : <span class="string">&#x27;&#123;&#123; theme.gitalk.github_id &#125;&#125;&#x27;</span>,</span><br><span class="line">      admin       : [<span class="string">&#x27;&#123;&#123; theme.gitalk.admin_user &#125;&#125;&#x27;</span>],</span><br><span class="line">      id          : <span class="string">&#x27;&#123;&#123; gitalk_md5(page.path) &#125;&#125;&#x27;</span>,</span><br><span class="line">      &#123;%- <span class="keyword">if</span> theme.gitalk.language == <span class="string">&#x27;&#x27;</span> %&#125;</span><br><span class="line">        language: <span class="built_in">window</span>.navigator.language || <span class="built_in">window</span>.navigator.userLanguage,</span><br><span class="line">      &#123;% <span class="keyword">else</span> %&#125;</span><br><span class="line">        language: <span class="string">&#x27;&#123;&#123; theme.gitalk.language &#125;&#125;&#x27;</span>,</span><br><span class="line">      &#123;%- endif %&#125;</span><br><span class="line">      distractionFreeMode: &#123;&#123; theme.gitalk.distraction_free_mode &#125;&#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    gitalk.render(<span class="string">&#x27;gitalk-container&#x27;</span>);</span><br><span class="line">  &#125;, <span class="built_in">window</span>.Gitalk);</span><br><span class="line">&#125;);</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&#123;%- endif %&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
     </div>
 
     
     
     
-        
-
-  <div class="followme">
-    <p>欢迎关注我的其它发布渠道</p>
-
-    <div class="social-list">
-
-        <div class="social-item">
-          <a target="_blank" class="social-link" href="/atom.xml">
-            <span class="icon">
-              <i class="fa fa-rss"></i>
-            </span>
-
-            <span class="label">RSS</span>
-          </a>
-        </div>
-    </div>
-  </div>
-
-
       <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/java/" rel="tag"># java</a>
-              <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag"># 设计模式</a>
-          </div>
-
-        
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2020/11/03/%E8%BF%87%E6%BB%A4%E5%99%A8%E6%A8%A1%E5%BC%8F/" rel="prev" title="过滤器模式">
-      <i class="fa fa-chevron-left"></i> 过滤器模式
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/11/03/%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/" rel="next" title="外观模式">
-      外观模式 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
+        <div class="post-eof"></div>
       </footer>
-    
   </article>
   
   
   
 
 
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
+
+
 
           </div>
           
-    <div class="comments" id="gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -359,7 +330,6 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">组合模式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%E6%BC%94%E7%A4%BA%EF%BC%9A"><span class="nav-number">1.0.0.0.1.</span> <span class="nav-text">示例演示：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%B4%E6%98%8E%EF%BC%9A"><span class="nav-number">1.0.0.0.2.</span> <span class="nav-text">说明：</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -564,25 +534,6 @@ window.addEventListener('pjax:success', () => {
 
   
 
-<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-
-<script>
-NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
-  NexT.utils.getScript('https://unpkg.com/gitalk/dist/gitalk.min.js', () => {
-    var gitalk = new Gitalk({
-      clientID    : 'ea0dc187046ba659ee79',
-      clientSecret: 'e4f21670ec8aad455b11223e10da3d0f4298d83d',
-      repo        : 'radio93.github.io',
-      owner       : 'radio93',
-      admin       : ['radio93'],
-      id          : 'd0c3a77e04bf9e0b178e2b3ae6072140',
-        language: 'zh-CN',
-      distractionFreeMode: true
-    });
-    gitalk.render('gitalk-container');
-  }, window.Gitalk);
-});
-</script>
 
     </div>
 </body>
