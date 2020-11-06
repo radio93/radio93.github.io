@@ -185,6 +185,95 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://radio93.github.io/2020/11/03/%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="radio">
+      <meta itemprop="description" content="千门明月，天如水，正是人间佳节。开尽小梅春气透，花烛家家罗列。来往绮罗，喧阗箫鼓，达旦何曾歇。少年当此，风光真是殊绝。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Radio">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/11/03/%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">桥接模式</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-11-03 14:51:06 / 修改时间：14:58:08" itemprop="dateCreated datePublished" datetime="2020-11-03T14:51:06+08:00">2020-11-03</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="桥接模式"><a href="#桥接模式" class="headerlink" title="桥接模式"></a>桥接模式</h1><blockquote>
+<p>桥接（Bridge）是用于把抽象化与实现化解耦，使得二者可以独立变化。这种类型的设计模式属于结构型模式，它通过提供抽象化和实现化之间的桥接结构，来实现二者的解耦。</p>
+<p>这种模式涉及到一个作为桥接的接口，使得实体类的功能独立于接口实现类。这两种类型的类可被结构化改变而互不影响。</p>
+</blockquote>
+<h5 id="示例演示："><a href="#示例演示：" class="headerlink" title="示例演示："></a>示例演示：</h5><ol>
+<li><p>我们创建一个性别api接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test.bridge;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">SexApi</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sex</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建两个接口实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test.bridge;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Male</span> <span class="keyword">implements</span> <span class="title">SexApi</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sex</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;my sex is male&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test.bridge;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Female</span> <span class="keyword">implements</span> <span class="title">SexApi</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sex</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;my sex is female&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建一个people的抽象类，并赋予性别api的接口功能，为people提供一个性别</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test.bridge;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">People</span> </span>&#123;</span><br><span class="line">    <span class="keyword">protected</span> SexApi sexApi;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="title">People</span><span class="params">(SexApi sexApi)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.sexApi = sexApi;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">peopleSex</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建people的实体类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test.bridge;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PeopleImpl</span> <span class="keyword">extends</span> <span class="title">People</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="title">PeopleImpl</span><span class="params">(SexApi sexApi)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(sexApi);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">peopleSex</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        sexApi.sex();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>完成上述步骤，我们就可以开始演示了</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test.bridge;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BridgeDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        People male = <span class="keyword">new</span> PeopleImpl(<span class="keyword">new</span> Male());</span><br><span class="line">        People female = <span class="keyword">new</span> PeopleImpl(<span class="keyword">new</span> Female());</span><br><span class="line"></span><br><span class="line">        male.peopleSex();</span><br><span class="line">        female.peopleSex();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">my sex is male</span><br><span class="line">my sex is female</span><br></pre></td></tr></table></figure>
+
+<h5 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h5><blockquote>
+<p><strong>优点：</strong> 1、抽象和实现的分离。 2、优秀的扩展能力。 3、实现细节对客户透明。</p>
+<p><strong>缺点：</strong>桥接模式的引入会增加系统的理解与设计难度，由于聚合关联关系建立在抽象层，要求开发者针对抽象进行设计与编程。</p>
+</blockquote>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://radio93.github.io/2020/11/03/%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1084,103 +1173,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://radio93.github.io/2020/10/27/hexo%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="radio">
-      <meta itemprop="description" content="千门明月，天如水，正是人间佳节。开尽小梅春气透，花烛家家罗列。来往绮罗，喧阗箫鼓，达旦何曾歇。少年当此，风光真是殊绝。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Radio">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/27/hexo%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">hexo使用记录</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-10-27 14:44:00" itemprop="dateCreated datePublished" datetime="2020-10-27T14:44:00+08:00">2020-10-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-11-02 09:58:19" itemprop="dateModified" datetime="2020-11-02T09:58:19+08:00">2020-11-02</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C/" itemprop="url" rel="index"><span itemprop="name">文档操作</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h5 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Ctrl+B对选中字体加粗</span><br><span class="line">$$+Enter 公式</span><br></pre></td></tr></table></figure>
-
-<h5 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a></h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new 新博客名字</span><br><span class="line"><span class="comment">#编译md文件为静态页面</span></span><br><span class="line">$ hexo generate</span><br><span class="line"><span class="comment">#推送public文件夹到main，github收到main发生变化，会自动重启，需要等待一会</span></span><br><span class="line">$ hexo deploy</span><br><span class="line"><span class="comment">#编辑+部署</span></span><br><span class="line">$ hexo g -d</span><br><span class="line"></span><br><span class="line">$ hexo new page <span class="string">&quot;页面名称&quot;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>source源码维护，方便不同计算机维护博客</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">更新本地源码到<span class="built_in">source</span></span><br><span class="line">git init</span><br><span class="line">git checkout -b <span class="built_in">source</span></span><br><span class="line">git add -A</span><br><span class="line">git commit -m <span class="string">&quot;init blog&quot;</span></span><br><span class="line">git remote add origin git@github.com:radio93/radio93.github.io.git</span><br><span class="line">git push origin <span class="built_in">source</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h5 id="新环境博客维护"><a href="#新环境博客维护" class="headerlink" title="新环境博客维护"></a>新环境博客维护</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#从git上的source分支down下来的源码</span></span><br><span class="line">$ <span class="built_in">cd</span> 项目</span><br><span class="line"><span class="comment">#Hexo 3.0 把服务器独立成了个别模块，必须先安装 hexo-server 才能使用</span></span><br><span class="line">$ npm install hexo-server --save</span><br><span class="line"><span class="comment">#编译博客源码为静态页面</span></span><br><span class="line">$ hexo generate</span><br><span class="line"><span class="comment">#尝试启动博客 默认端口4000</span></span><br><span class="line">$ hexo server</span><br><span class="line"><span class="comment">#如果端口冲突 可以修改端口</span></span><br><span class="line">$ hexo server -p 5000</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h5 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h5><h6 id="如果radio93-github-io无法访问，需要修改此处，博客主页在main下的index-html"><a href="#如果radio93-github-io无法访问，需要修改此处，博客主页在main下的index-html" class="headerlink" title="如果radio93.github.io无法访问，需要修改此处，博客主页在main下的index.html"></a>如果radio93.github.io无法访问，需要修改此处，博客主页在main下的index.html</h6><p><img src="https://radio93.oss-cn-beijing.aliyuncs.com/gitbub/image-20201027162208507.png?x-oss-process=style/radio93"></p>
-<h6 id="项目名称需要和github名称保持一致"><a href="#项目名称需要和github名称保持一致" class="headerlink" title="项目名称需要和github名称保持一致"></a>项目名称需要和github名称保持一致</h6><p><img src="https://radio93.oss-cn-beijing.aliyuncs.com/gitbub/image-20201027162349781.png?x-oss-process=style/radio93"></p>
-<h6 id="如果Gitalk控制台总是报错，可以查看下-themes-next-layout-third-party-comments-gitalk-swig中的链接是否最新，因为原域名已被更新"><a href="#如果Gitalk控制台总是报错，可以查看下-themes-next-layout-third-party-comments-gitalk-swig中的链接是否最新，因为原域名已被更新" class="headerlink" title="如果Gitalk控制台总是报错，可以查看下\themes\next\layout_third-party\comments\gitalk.swig中的链接是否最新，因为原域名已被更新"></a>如果Gitalk控制台总是报错，可以查看下\themes\next\layout_third-party\comments\gitalk.swig中的链接是否最新，因为原域名已被更新</h6><p>gitalk.swig源码如下：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&#123;%- <span class="keyword">if</span> page.comments %&#125;</span><br><span class="line">&#123;%- set gitalk_css_uri = theme.vendors.gitalk_css or <span class="string">&#x27;https://unpkg.com/gitalk/dist/gitalk.css&#x27;</span> %&#125;</span><br><span class="line">&lt;link rel=<span class="string">&quot;stylesheet&quot;</span> href=<span class="string">&quot;&#123;&#123; gitalk_css_uri &#125;&#125;&quot;</span>&gt;</span><br><span class="line"></span><br><span class="line">&#123;%- set gitalk_js_uri = theme.vendors.gitalk_js or <span class="string">&#x27;https://unpkg.com/gitalk/dist/gitalk.min.js&#x27;</span> %&#125;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">NexT.utils.loadComments(<span class="built_in">document</span>.querySelector(<span class="string">&#x27;#gitalk-container&#x27;</span>), <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  NexT.utils.getScript(<span class="string">&#x27;&#123;&#123; gitalk_js_uri &#125;&#125;&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> gitalk = <span class="keyword">new</span> Gitalk(&#123;</span><br><span class="line">      clientID    : <span class="string">&#x27;&#123;&#123; theme.gitalk.client_id &#125;&#125;&#x27;</span>,</span><br><span class="line">      clientSecret: <span class="string">&#x27;&#123;&#123; theme.gitalk.client_secret &#125;&#125;&#x27;</span>,</span><br><span class="line">      repo        : <span class="string">&#x27;&#123;&#123; theme.gitalk.repo &#125;&#125;&#x27;</span>,</span><br><span class="line">      owner       : <span class="string">&#x27;&#123;&#123; theme.gitalk.github_id &#125;&#125;&#x27;</span>,</span><br><span class="line">      admin       : [<span class="string">&#x27;&#123;&#123; theme.gitalk.admin_user &#125;&#125;&#x27;</span>],</span><br><span class="line">      id          : <span class="string">&#x27;&#123;&#123; gitalk_md5(page.path) &#125;&#125;&#x27;</span>,</span><br><span class="line">      &#123;%- <span class="keyword">if</span> theme.gitalk.language == <span class="string">&#x27;&#x27;</span> %&#125;</span><br><span class="line">        language: <span class="built_in">window</span>.navigator.language || <span class="built_in">window</span>.navigator.userLanguage,</span><br><span class="line">      &#123;% <span class="keyword">else</span> %&#125;</span><br><span class="line">        language: <span class="string">&#x27;&#123;&#123; theme.gitalk.language &#125;&#125;&#x27;</span>,</span><br><span class="line">      &#123;%- endif %&#125;</span><br><span class="line">      distractionFreeMode: &#123;&#123; theme.gitalk.distraction_free_mode &#125;&#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    gitalk.render(<span class="string">&#x27;gitalk-container&#x27;</span>);</span><br><span class="line">  &#125;, <span class="built_in">window</span>.Gitalk);</span><br><span class="line">&#125;);</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&#123;%- endif %&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1248,7 +1244,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-count">31</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

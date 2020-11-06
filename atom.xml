@@ -6,7 +6,7 @@
   <link href="https://radio93.github.io/atom.xml" rel="self"/>
   
   <link href="https://radio93.github.io/"/>
-  <updated>2020-11-06T09:07:15.707Z</updated>
+  <updated>2020-11-06T11:32:44.941Z</updated>
   <id>https://radio93.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>设计模式总结</title>
+    <link href="https://radio93.github.io/2020/11/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%80%BB%E7%BB%93/"/>
+    <id>https://radio93.github.io/2020/11/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%80%BB%E7%BB%93/</id>
+    <published>2020-11-06T11:32:04.000Z</published>
+    <updated>2020-11-06T11:32:44.941Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="https://radio93.oss-cn-beijing.aliyuncs.com/gitbub/image-20201106193216406.png?x-oss-process=style/radio93" alt="image-20201106193216406"></p><p><img src="https://radio93.oss-cn-beijing.aliyuncs.com/gitbub/image-20201106193242897.png?x-oss-process=style/radio93" alt="image-20201106193242897"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;&lt;img src=&quot;https://radio93.oss-cn-beijing.aliyuncs.com/gitbub/image-20201106193216406.png?x-oss-process=style/radio93&quot; alt=&quot;image-20201106</summary>
+      
+    
+    
+    
+    
+    <category term="java" scheme="https://radio93.github.io/tags/java/"/>
+    
+    <category term="设计模式" scheme="https://radio93.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
   
   <entry>
     <title>单例模式</title>
@@ -480,31 +504,6 @@
       
     <summary type="html">&lt;h1 id=&quot;过滤器模式&quot;&gt;&lt;a href=&quot;#过滤器模式&quot; class=&quot;headerlink&quot; title=&quot;过滤器模式&quot;&gt;&lt;/a&gt;过滤器模式&lt;/h1&gt;&lt;blockquote&gt;
 &lt;p&gt;过滤器模式（Filter Pattern）或标准模式（Criteria Pattern）是</summary>
-      
-    
-    
-    
-    
-    <category term="java" scheme="https://radio93.github.io/tags/java/"/>
-    
-    <category term="设计模式" scheme="https://radio93.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>桥接模式</title>
-    <link href="https://radio93.github.io/2020/11/03/%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/"/>
-    <id>https://radio93.github.io/2020/11/03/%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/</id>
-    <published>2020-11-03T06:51:06.000Z</published>
-    <updated>2020-11-03T06:58:08.118Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="桥接模式"><a href="#桥接模式" class="headerlink" title="桥接模式"></a>桥接模式</h1><blockquote><p>桥接（Bridge）是用于把抽象化与实现化解耦，使得二者可以独立变化。这种类型的设计模式属于结构型模式，它通过提供抽象化和实现化之间的桥接结构，来实现二者的解耦。</p><p>这种模式涉及到一个作为桥接的接口，使得实体类的功能独立于接口实现类。这两种类型的类可被结构化改变而互不影响。</p></blockquote><h5 id="示例演示："><a href="#示例演示：" class="headerlink" title="示例演示："></a>示例演示：</h5><ol><li><p>我们创建一个性别api接口</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test.bridge;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">SexApi</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sex</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p>创建两个接口实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test.bridge;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Male</span> <span class="keyword">implements</span> <span class="title">SexApi</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sex</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;my sex is male&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test.bridge;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Female</span> <span class="keyword">implements</span> <span class="title">SexApi</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sex</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;my sex is female&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p>创建一个people的抽象类，并赋予性别api的接口功能，为people提供一个性别</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test.bridge;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">People</span> </span>&#123;</span><br><span class="line">    <span class="keyword">protected</span> SexApi sexApi;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="title">People</span><span class="params">(SexApi sexApi)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.sexApi = sexApi;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">peopleSex</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p>创建people的实体类</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test.bridge;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PeopleImpl</span> <span class="keyword">extends</span> <span class="title">People</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="title">PeopleImpl</span><span class="params">(SexApi sexApi)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(sexApi);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">peopleSex</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        sexApi.sex();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p>完成上述步骤，我们就可以开始演示了</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test.bridge;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BridgeDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        People male = <span class="keyword">new</span> PeopleImpl(<span class="keyword">new</span> Male());</span><br><span class="line">        People female = <span class="keyword">new</span> PeopleImpl(<span class="keyword">new</span> Female());</span><br><span class="line"></span><br><span class="line">        male.peopleSex();</span><br><span class="line">        female.peopleSex();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>运行结果：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">my sex is male</span><br><span class="line">my sex is female</span><br></pre></td></tr></table></figure><h5 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h5><blockquote><p><strong>优点：</strong> 1、抽象和实现的分离。 2、优秀的扩展能力。 3、实现细节对客户透明。</p><p><strong>缺点：</strong>桥接模式的引入会增加系统的理解与设计难度，由于聚合关联关系建立在抽象层，要求开发者针对抽象进行设计与编程。</p></blockquote></li></ol>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;桥接模式&quot;&gt;&lt;a href=&quot;#桥接模式&quot; class=&quot;headerlink&quot; title=&quot;桥接模式&quot;&gt;&lt;/a&gt;桥接模式&lt;/h1&gt;&lt;blockquote&gt;
-&lt;p&gt;桥接（Bridge）是用于把抽象化与实现化解耦，使得二者可以独立变化。这种类型的设计模式属于结构型</summary>
       
     
     
