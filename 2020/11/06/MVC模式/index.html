@@ -20,21 +20,21 @@
     var CONFIG = {"hostname":"radio93.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="桥接模式 桥接（Bridge）是用于把抽象化与实现化解耦，使得二者可以独立变化。这种类型的设计模式属于结构型模式，它通过提供抽象化和实现化之间的桥接结构，来实现二者的解耦。 这种模式涉及到一个作为桥接的接口，使得实体类的功能独立于接口实现类。这两种类型的类可被结构化改变而互不影响。  示例演示： 我们创建一个性别api接口 12345package test.bridge;public inter">
+  <meta name="description" content="MVC模式 MVC 模式代表 Model-View-Controller（模型-视图-控制器） 模式。这种模式用于应用程序的分层开发。 Model（模型） - 模型代表一个存取数据的对象或 JAVA POJO。它也可以带有逻辑，在数据变化时更新控制器。 View（视图） - 视图代表模型包含的数据的可视化。 Controller（控制器） - 控制器作用于模型和视图上。它控制数据流向模型对象，并在">
 <meta property="og:type" content="article">
-<meta property="og:title" content="桥接模式">
-<meta property="og:url" content="https://radio93.github.io/2020/11/03/%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/index.html">
+<meta property="og:title" content="MVC模式">
+<meta property="og:url" content="https://radio93.github.io/2020/11/06/MVC%E6%A8%A1%E5%BC%8F/index.html">
 <meta property="og:site_name" content="Radio">
-<meta property="og:description" content="桥接模式 桥接（Bridge）是用于把抽象化与实现化解耦，使得二者可以独立变化。这种类型的设计模式属于结构型模式，它通过提供抽象化和实现化之间的桥接结构，来实现二者的解耦。 这种模式涉及到一个作为桥接的接口，使得实体类的功能独立于接口实现类。这两种类型的类可被结构化改变而互不影响。  示例演示： 我们创建一个性别api接口 12345package test.bridge;public inter">
+<meta property="og:description" content="MVC模式 MVC 模式代表 Model-View-Controller（模型-视图-控制器） 模式。这种模式用于应用程序的分层开发。 Model（模型） - 模型代表一个存取数据的对象或 JAVA POJO。它也可以带有逻辑，在数据变化时更新控制器。 View（视图） - 视图代表模型包含的数据的可视化。 Controller（控制器） - 控制器作用于模型和视图上。它控制数据流向模型对象，并在">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-11-03T06:51:06.000Z">
-<meta property="article:modified_time" content="2020-11-03T06:58:08.118Z">
+<meta property="article:published_time" content="2020-11-06T06:13:27.000Z">
+<meta property="article:modified_time" content="2020-11-06T06:39:31.550Z">
 <meta property="article:author" content="radio">
 <meta property="article:tag" content="java">
 <meta property="article:tag" content="设计模式">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://radio93.github.io/2020/11/03/%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/">
+<link rel="canonical" href="https://radio93.github.io/2020/11/06/MVC%E6%A8%A1%E5%BC%8F/">
 
 
 <script id="page-configurations">
@@ -47,7 +47,7 @@
   };
 </script>
 
-  <title>桥接模式 | Radio</title>
+  <title>MVC模式 | Radio</title>
   
 
 
@@ -190,7 +190,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://radio93.github.io/2020/11/03/%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/">
+    <link itemprop="mainEntityOfPage" href="https://radio93.github.io/2020/11/06/MVC%E6%A8%A1%E5%BC%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -203,7 +203,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          桥接模式
+          MVC模式
         </h1>
 
         <div class="post-meta">
@@ -214,7 +214,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-11-03 14:51:06 / 修改时间：14:58:08" itemprop="dateCreated datePublished" datetime="2020-11-03T14:51:06+08:00">2020-11-03</time>
+              <time title="创建时间：2020-11-06 14:13:27 / 修改时间：14:39:31" itemprop="dateCreated datePublished" datetime="2020-11-06T14:13:27+08:00">2020-11-06</time>
             </span>
 
           
@@ -235,37 +235,33 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="桥接模式"><a href="#桥接模式" class="headerlink" title="桥接模式"></a>桥接模式</h1><blockquote>
-<p>桥接（Bridge）是用于把抽象化与实现化解耦，使得二者可以独立变化。这种类型的设计模式属于结构型模式，它通过提供抽象化和实现化之间的桥接结构，来实现二者的解耦。</p>
-<p>这种模式涉及到一个作为桥接的接口，使得实体类的功能独立于接口实现类。这两种类型的类可被结构化改变而互不影响。</p>
+        <h1 id="MVC模式"><a href="#MVC模式" class="headerlink" title="MVC模式"></a>MVC模式</h1><blockquote>
+<p>MVC 模式代表 Model-View-Controller（模型-视图-控制器） 模式。这种模式用于应用程序的分层开发。</p>
+<p><strong>Model（模型）</strong> - 模型代表一个存取数据的对象或 JAVA POJO。它也可以带有逻辑，在数据变化时更新控制器。</p>
+<p><strong>View（视图）</strong> - 视图代表模型包含的数据的可视化。</p>
+<p><strong>Controller（控制器）</strong> - 控制器作用于模型和视图上。它控制数据流向模型对象，并在数据变化时更新视图。它使视图与模型分离开。</p>
 </blockquote>
 <h5 id="示例演示："><a href="#示例演示：" class="headerlink" title="示例演示："></a>示例演示：</h5><ol>
-<li><p>我们创建一个性别api接口</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test.bridge;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">SexApi</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sex</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li><p>新建一个model</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test.mvc;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PeopleModel</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Integer id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>创建两个接口实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test.bridge;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Male</span> <span class="keyword">implements</span> <span class="title">SexApi</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sex</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;my sex is male&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test.bridge;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Female</span> <span class="keyword">implements</span> <span class="title">SexApi</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sex</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;my sex is female&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li><p>新建view</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test.mvc;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PeopleView</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">showPeople</span><span class="params">(PeopleModel model)</span> </span>&#123;</span><br><span class="line">        System.out.println(model.toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>创建一个people的抽象类，并赋予性别api的接口功能，为people提供一个性别</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test.bridge;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">People</span> </span>&#123;</span><br><span class="line">    <span class="keyword">protected</span> SexApi sexApi;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="title">People</span><span class="params">(SexApi sexApi)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.sexApi = sexApi;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">peopleSex</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>创建people的实体类</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test.bridge;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PeopleImpl</span> <span class="keyword">extends</span> <span class="title">People</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="title">PeopleImpl</span><span class="params">(SexApi sexApi)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(sexApi);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">peopleSex</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        sexApi.sex();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li><p>新建controller</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test.mvc;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PeopleController</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> PeopleModel model;</span><br><span class="line">    <span class="keyword">private</span> PeopleView view;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">PeopleController</span><span class="params">(PeopleModel model, PeopleView view)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.model = model;</span><br><span class="line">        <span class="keyword">this</span>.view = view;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPeopleId</span><span class="params">(Integer id)</span></span>&#123;</span><br><span class="line">        model.setId(id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Integer <span class="title">getPeopleId</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> model.getId();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPeopleName</span><span class="params">(String name)</span></span>&#123;</span><br><span class="line">        model.setName(name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getPeopleName</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> model.getName();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">showPeople</span><span class="params">()</span></span>&#123;</span><br><span class="line">        view.showPeople(model);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>完成上述步骤，我们就可以开始演示了</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test.bridge;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BridgeDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        People male = <span class="keyword">new</span> PeopleImpl(<span class="keyword">new</span> Male());</span><br><span class="line">        People female = <span class="keyword">new</span> PeopleImpl(<span class="keyword">new</span> Female());</span><br><span class="line"></span><br><span class="line">        male.peopleSex();</span><br><span class="line">        female.peopleSex();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test.mvc;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MvcDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> PeopleModel <span class="title">getModel</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        PeopleModel model = <span class="keyword">new</span> PeopleModel();</span><br><span class="line">        model.setId(<span class="number">1</span>);</span><br><span class="line">        model.setName(<span class="string">&quot;abc&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> model;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//模拟数据库取值</span></span><br><span class="line">        PeopleModel model = getModel();</span><br><span class="line">        <span class="comment">//创建视图</span></span><br><span class="line">        PeopleView view = <span class="keyword">new</span> PeopleView();</span><br><span class="line">        <span class="comment">//把people信息输出给控制台</span></span><br><span class="line">        PeopleController controller = <span class="keyword">new</span> PeopleController(model, view);</span><br><span class="line">        controller.showPeople();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//更新数据</span></span><br><span class="line">        controller.setPeopleId(<span class="number">2</span>);</span><br><span class="line">        controller.setPeopleName(<span class="string">&quot;def&quot;</span>);</span><br><span class="line">        <span class="comment">//再次输出</span></span><br><span class="line">        controller.showPeople();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>运行结果：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">my sex is male</span><br><span class="line">my sex is female</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PeopleModel(id=<span class="number">1</span>, name=abc)</span><br><span class="line">PeopleModel(id=<span class="number">2</span>, name=def)</span><br></pre></td></tr></table></figure>
 
-<h5 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h5><blockquote>
-<p><strong>优点：</strong> 1、抽象和实现的分离。 2、优秀的扩展能力。 3、实现细节对客户透明。</p>
-<p><strong>缺点：</strong>桥接模式的引入会增加系统的理解与设计难度，由于聚合关联关系建立在抽象层，要求开发者针对抽象进行设计与编程。</p>
-</blockquote>
 </li>
 </ol>
+<h5 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h5><blockquote>
+<p>MVC模式是典型的前后端数据交互模式。</p>
+</blockquote>
 
     </div>
 
@@ -304,13 +300,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/11/03/%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/" rel="prev" title="适配器模式">
-      <i class="fa fa-chevron-left"></i> 适配器模式
+    <a href="/2020/11/06/%E8%AE%BF%E9%97%AE%E8%80%85%E6%A8%A1%E5%BC%8F/" rel="prev" title="访问者模式">
+      <i class="fa fa-chevron-left"></i> 访问者模式
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/11/03/%E8%BF%87%E6%BB%A4%E5%99%A8%E6%A8%A1%E5%BC%8F/" rel="next" title="过滤器模式">
-      过滤器模式 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -370,7 +363,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">桥接模式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%E6%BC%94%E7%A4%BA%EF%BC%9A"><span class="nav-number">1.0.0.0.1.</span> <span class="nav-text">示例演示：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%B4%E6%98%8E%EF%BC%9A"><span class="nav-number">1.0.0.0.2.</span> <span class="nav-text">说明：</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MVC%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">MVC模式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%E6%BC%94%E7%A4%BA%EF%BC%9A"><span class="nav-number">1.0.0.0.1.</span> <span class="nav-text">示例演示：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%B4%E6%98%8E%EF%BC%9A"><span class="nav-number">1.0.0.0.2.</span> <span class="nav-text">说明：</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -586,7 +579,7 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
       repo        : 'radio93.github.io',
       owner       : 'radio93',
       admin       : ['radio93'],
-      id          : 'b5aad30e010b1e0753a19e19f9376c21',
+      id          : '3ab40382ddc18603db09474d20790921',
         language: 'zh-CN',
       distractionFreeMode: true
     });
