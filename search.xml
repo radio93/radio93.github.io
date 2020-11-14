@@ -1194,7 +1194,7 @@
 <p>我们运行一下</p>
 <figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="number">2020</span>-<span class="number">11</span>-<span class="number">09</span> <span class="number">19</span>:<span class="number">57</span>:<span class="number">12</span></span><br><span class="line"><span class="number">2020</span>-<span class="number">11</span>-<span class="number">09</span> <span class="number">19</span>:<span class="number">57</span>:<span class="number">20</span></span><br></pre></td></tr></tbody></table></figure>
 
-<p>这段程序是没有问题的，慢的原因在哪，在<code>Long sum = 0L</code>这里，意味着程序构造了大约 2^31 个多余的 Long 例（大约每次往 Long sum 中增加 long 时构造一个实例） 。将sum 的声明从 Long 改成 long ，我们再试一下</p>
+<p>这段程序是没有问题的，慢的原因在哪，在<code>Long sum = 0L</code>这里，意味着程序构造了大约 2^31 个多余的 Long 实例（大约每次往 Long sum 中增加 long 时构造一个实例） 。将sum 的声明从 Long 改成 long ，我们再试一下</p>
 <figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="number">2020</span>-<span class="number">11</span>-<span class="number">09</span> <span class="number">19</span>:<span class="number">59</span>:<span class="number">44</span></span><br><span class="line"><span class="number">2020</span>-<span class="number">11</span>-<span class="number">09</span> <span class="number">19</span>:<span class="number">59</span>:<span class="number">45</span></span><br></pre></td></tr></tbody></table></figure>
 
 <h5 id="2，避免创建不必要的对象"><a href="#2，避免创建不必要的对象" class="headerlink" title="2，避免创建不必要的对象"></a>2，避免创建不必要的对象</h5><p>比如下面这个例子</p>
@@ -1206,7 +1206,7 @@
 <p>再往里走</p>
 <figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">matches</span><span class="params">(String regex, CharSequence input)</span> </span>{</span><br><span class="line">    Pattern p = Pattern.compile(regex);</span><br><span class="line">    Matcher m = p.matcher(input);</span><br><span class="line">    <span class="keyword">return</span> m.matches();</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
-<p>在往里走</p>
+<p>再往里走</p>
 <figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Pattern <span class="title">compile</span><span class="params">(String regex)</span> </span>{</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Pattern(regex, <span class="number">0</span>);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <p>它在内部为正则表达式创建了一个 <code>Pattern</code> 实例，却只用了1次，之后就可以进行垃圾回收了，创建 <code>Pattenr</code>实例的成本很高 ，因为需要将正则表达式编译成一个有限状态机（ finite state machine）。</p>
@@ -1218,6 +1218,321 @@
 <li>只要对象的equals方法的比较操作所用到的信息未被修改，那么对同一个对象调用多次其hashCode返回值不变</li>
 <li>若两个对象通过equals得到是相等的，那么调用这两个对象任意一个对象的hashCode方法产生整数结果一样</li>
 <li>若两个对象通过equals得到是不相等的，那么调用这两个对象任意一个对象的hashCode方法产生的结果也可能相等,但是从提高散列表(hash table)的性能分析，给不相等的对象产生不同的结果会更好</li>
+</ol>
+<h5 id="4，Lambda-优先于匿名类，和-java-util-function使用"><a href="#4，Lambda-优先于匿名类，和-java-util-function使用" class="headerlink" title="4，Lambda 优先于匿名类，和 java.util.function使用"></a>4，Lambda 优先于匿名类，和 java.util.function使用</h5><p>举个例子，我们看下面这个代码</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> effectiveJava.enumTest;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">enum</span> <span class="title">OpemrationOld</span> </span>{</span><br><span class="line">    PLUS(<span class="string">"+"</span>) {</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">apply</span><span class="params">(<span class="keyword">double</span> x, <span class="keyword">double</span> y)</span> </span>{</span><br><span class="line">            <span class="keyword">return</span> x + y;</span><br><span class="line">        }</span><br><span class="line">    },</span><br><span class="line">    MINUS(<span class="string">"-"</span>) {</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">apply</span><span class="params">(<span class="keyword">double</span> x, <span class="keyword">double</span> y)</span> </span>{</span><br><span class="line">            <span class="keyword">return</span> x - y;</span><br><span class="line">        }</span><br><span class="line">    },</span><br><span class="line">    TIMES(<span class="string">"*"</span>) {</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">apply</span><span class="params">(<span class="keyword">double</span> x, <span class="keyword">double</span> y)</span> </span>{</span><br><span class="line">            <span class="keyword">return</span> x * y;</span><br><span class="line">        }</span><br><span class="line">    },</span><br><span class="line">    DIVIDE(<span class="string">"/"</span>) {</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">apply</span><span class="params">(<span class="keyword">double</span> x, <span class="keyword">double</span> y)</span> </span>{</span><br><span class="line">            <span class="keyword">return</span> x / y;</span><br><span class="line">        }</span><br><span class="line">    };</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String symbol;</span><br><span class="line"></span><br><span class="line">    OpemrationOld(String symbol) {</span><br><span class="line">        <span class="keyword">this</span>.symbol = symbol;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">double</span> <span class="title">apply</span><span class="params">(<span class="keyword">double</span> x, <span class="keyword">double</span> y)</span></span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">testold</span> </span>{</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</span><br><span class="line">        <span class="keyword">double</span> value = OpemrationOld.DIVIDE.apply(<span class="number">1</span>,<span class="number">2</span>);</span><br><span class="line">        System.out.println(value);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>这个代码表示对任意两个数进行加减乘除运算，jdk1.8新增了Lambda表达式后，我们就可以简写这段代码</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> effectiveJava.enumTest;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.function.DoubleBinaryOperator;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">enum</span> <span class="title">Opemration</span> </span>{</span><br><span class="line">    PLUS(<span class="string">"+"</span>, (x, y) -&gt; x + y),</span><br><span class="line">    MINUS(<span class="string">"-"</span>, (x, y) -&gt; x - y),</span><br><span class="line">    TIMES(<span class="string">"*"</span>, (x, y) -&gt; x * y),</span><br><span class="line">    DIVIDE(<span class="string">"/"</span>, (x, y) -&gt; x / y);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String symbol;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> DoubleBinaryOperator op;</span><br><span class="line"></span><br><span class="line">    Opemration(String symbol, DoubleBinaryOperator op) {</span><br><span class="line">        <span class="keyword">this</span>.symbol = symbol;</span><br><span class="line">        <span class="keyword">this</span>.op = op;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>{</span><br><span class="line">        <span class="keyword">return</span> symbol;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">apply</span><span class="params">(<span class="keyword">double</span> x, <span class="keyword">double</span> y)</span> </span>{</span><br><span class="line">        <span class="keyword">return</span> op.applyAsDouble(x, y);</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">test</span> </span>{</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</span><br><span class="line">        <span class="keyword">double</span> value = Opemration.DIVIDE.apply(<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line">        System.out.println(value);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>这里我们提一下<code>DoubleBinaryOperator</code>这个接口，这个接口是java.util.function包中的，也属于jdk1.8新增的包，用来支持 Java的函数式编程。</p>
+<p>那这个接口是什么意思呢 表示：代表了作用于两个double值操作符的操作，并且返回了一个double值的结果。</p>
+<p>这个包下提供了非常多的函数</p>
+<p><img src="https://radio93.oss-cn-beijing.aliyuncs.com/gitbub/image-20201110202033145.png?x-oss-process=style/radio93" alt="image-20201110202033145"></p>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th><strong>接口</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td><strong>BiConsumer&lt;T,U&gt;</strong></td>
+<td>代表了一个接受两个输入参数的操作，并且不返回任何结果</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>BiFunction&lt;T,U,R&gt;</strong></td>
+<td>代表了一个接受两个输入参数的方法，并且返回一个结果</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>BinaryOperator<t></t></strong></td>
+<td>代表了一个作用于于两个同类型操作符的操作，并且返回了操作符同类型的结果</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>BiPredicate&lt;T,U&gt;</strong></td>
+<td>代表了一个两个参数的boolean值方法</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>BooleanSupplier</strong></td>
+<td>代表了boolean值结果的提供方</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>Consumer<t></t></strong></td>
+<td>代表了接受一个输入参数并且无返回的操作</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>DoubleBinaryOperator</strong></td>
+<td>代表了作用于两个double值操作符的操作，并且返回了一个double值的结果。</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>DoubleConsumer</strong></td>
+<td>代表一个接受double值参数的操作，并且不返回结果。</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>DoubleFunction<r></r></strong></td>
+<td>代表接受一个double值参数的方法，并且返回结果</td>
+</tr>
+<tr>
+<td>10</td>
+<td><strong>DoublePredicate</strong></td>
+<td>代表一个拥有double值参数的boolean值方法</td>
+</tr>
+<tr>
+<td>11</td>
+<td><strong>DoubleSupplier</strong></td>
+<td>代表一个double值结构的提供方</td>
+</tr>
+<tr>
+<td>12</td>
+<td><strong>DoubleToIntFunction</strong></td>
+<td>接受一个double类型输入，返回一个int类型结果。</td>
+</tr>
+<tr>
+<td>13</td>
+<td><strong>DoubleToLongFunction</strong></td>
+<td>接受一个double类型输入，返回一个long类型结果</td>
+</tr>
+<tr>
+<td>14</td>
+<td><strong>DoubleUnaryOperator</strong></td>
+<td>接受一个参数同为类型double,返回值类型也为double 。</td>
+</tr>
+<tr>
+<td>15</td>
+<td><strong>Function&lt;T,R&gt;</strong></td>
+<td>接受一个输入参数，返回一个结果。</td>
+</tr>
+<tr>
+<td>16</td>
+<td><strong>IntBinaryOperator</strong></td>
+<td>接受两个参数同为类型int,返回值类型也为int 。</td>
+</tr>
+<tr>
+<td>17</td>
+<td><strong>IntConsumer</strong></td>
+<td>接受一个int类型的输入参数，无返回值 。</td>
+</tr>
+<tr>
+<td>18</td>
+<td><strong>IntFunction<r></r></strong></td>
+<td>接受一个int类型输入参数，返回一个结果 。</td>
+</tr>
+<tr>
+<td>19</td>
+<td><strong>IntPredicate</strong></td>
+<td>接受一个int输入参数，返回一个布尔值的结果。</td>
+</tr>
+<tr>
+<td>20</td>
+<td><strong>IntSupplier</strong></td>
+<td>无参数，返回一个int类型结果。</td>
+</tr>
+<tr>
+<td>21</td>
+<td><strong>IntToDoubleFunction</strong></td>
+<td>接受一个int类型输入，返回一个double类型结果 。</td>
+</tr>
+<tr>
+<td>22</td>
+<td><strong>IntToLongFunction</strong></td>
+<td>接受一个int类型输入，返回一个long类型结果。</td>
+</tr>
+<tr>
+<td>23</td>
+<td><strong>IntUnaryOperator</strong></td>
+<td>接受一个参数同为类型int,返回值类型也为int 。</td>
+</tr>
+<tr>
+<td>24</td>
+<td><strong>LongBinaryOperator</strong></td>
+<td>接受两个参数同为类型long,返回值类型也为long。</td>
+</tr>
+<tr>
+<td>25</td>
+<td><strong>LongConsumer</strong></td>
+<td>接受一个long类型的输入参数，无返回值。</td>
+</tr>
+<tr>
+<td>26</td>
+<td><strong>LongFunction<r></r></strong></td>
+<td>接受一个long类型输入参数，返回一个结果。</td>
+</tr>
+<tr>
+<td>27</td>
+<td><strong>LongPredicate</strong></td>
+<td>接受一个long输入参数，返回一个布尔值类型结果。</td>
+</tr>
+<tr>
+<td>28</td>
+<td><strong>LongSupplier</strong></td>
+<td>无参数，返回一个结果long类型的值。</td>
+</tr>
+<tr>
+<td>29</td>
+<td><strong>LongToDoubleFunction</strong></td>
+<td>接受一个long类型输入，返回一个double类型结果。</td>
+</tr>
+<tr>
+<td>30</td>
+<td><strong>LongToIntFunction</strong></td>
+<td>接受一个long类型输入，返回一个int类型结果。</td>
+</tr>
+<tr>
+<td>31</td>
+<td><strong>LongUnaryOperator</strong></td>
+<td>接受一个参数同为类型long,返回值类型也为long。</td>
+</tr>
+<tr>
+<td>32</td>
+<td><strong>ObjDoubleConsumer<t></t></strong></td>
+<td>接受一个object类型和一个double类型的输入参数，无返回值。</td>
+</tr>
+<tr>
+<td>33</td>
+<td><strong>ObjIntConsumer<t></t></strong></td>
+<td>接受一个object类型和一个int类型的输入参数，无返回值。</td>
+</tr>
+<tr>
+<td>34</td>
+<td><strong>ObjLongConsumer<t></t></strong></td>
+<td>接受一个object类型和一个long类型的输入参数，无返回值。</td>
+</tr>
+<tr>
+<td>35</td>
+<td><strong>Predicate<t></t></strong></td>
+<td>接受一个输入参数，返回一个布尔值结果。</td>
+</tr>
+<tr>
+<td>36</td>
+<td><strong>Supplier<t></t></strong></td>
+<td>无参数，返回一个结果。</td>
+</tr>
+<tr>
+<td>37</td>
+<td><strong>ToDoubleBiFunction&lt;T,U&gt;</strong></td>
+<td>接受两个输入参数，返回一个double类型结果</td>
+</tr>
+<tr>
+<td>38</td>
+<td><strong>ToDoubleFunction<t></t></strong></td>
+<td>接受一个输入参数，返回一个double类型结果</td>
+</tr>
+<tr>
+<td>39</td>
+<td><strong>ToIntBiFunction&lt;T,U&gt;</strong></td>
+<td>接受两个输入参数，返回一个int类型结果。</td>
+</tr>
+<tr>
+<td>40</td>
+<td><strong>ToIntFunction<t></t></strong></td>
+<td>接受一个输入参数，返回一个int类型结果。</td>
+</tr>
+<tr>
+<td>41</td>
+<td><strong>ToLongBiFunction&lt;T,U&gt;</strong></td>
+<td>接受两个输入参数，返回一个long类型结果。</td>
+</tr>
+<tr>
+<td>42</td>
+<td><strong>ToLongFunction<t></t></strong></td>
+<td>接受一个输入参数，返回一个long类型结果。</td>
+</tr>
+<tr>
+<td>43</td>
+<td><strong>UnaryOperator<t></t></strong></td>
+<td>接受一个参数为类型T,返回值类型也为T。</td>
+</tr>
+</tbody></table>
+<p>我们用35  <strong>Predicate<t></t></strong>  接受一个输入参数，返回一个布尔值结果。来举个例子</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> effectiveJava.functionTest;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.function.Predicate;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Java8Tester</span> </span>{</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</span><br><span class="line">        List&lt;Integer&gt; list = Arrays.asList(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Predicate&lt;Integer&gt; predicate = n -&gt; true</span></span><br><span class="line">        <span class="comment">// n 是一个参数传递到 Predicate 接口的 test 方法</span></span><br><span class="line">        <span class="comment">// n 如果存在则 test 方法返回 true</span></span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"输出所有数据:"</span>);</span><br><span class="line">        eval(list, n -&gt; <span class="keyword">true</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">// Predicate&lt;Integer&gt; predicate1 = n -&gt; n%2 == 0</span></span><br><span class="line">        <span class="comment">// n 是一个参数传递到 Predicate 接口的 test 方法</span></span><br><span class="line">        <span class="comment">// 如果 n%2 为 0 test 方法返回 true</span></span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"输出所有偶数:"</span>);</span><br><span class="line">        eval(list, n -&gt; n % <span class="number">2</span> == <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Predicate&lt;Integer&gt; predicate2 = n -&gt; n &gt; 3</span></span><br><span class="line">        <span class="comment">// n 是一个参数传递到 Predicate 接口的 test 方法</span></span><br><span class="line">        <span class="comment">// 如果 n 大于 3 test 方法返回 true</span></span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"输出大于 3 的所有数字:"</span>);</span><br><span class="line">        eval(list, n -&gt; n &gt; <span class="number">3</span>);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">eval</span><span class="params">(List&lt;Integer&gt; list, Predicate&lt;Integer&gt; predicate)</span> </span>{</span><br><span class="line">        <span class="keyword">for</span> (Integer i : list) {</span><br><span class="line">            <span class="keyword">if</span> (predicate.test(i)) {</span><br><span class="line">                System.out.println(i);</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+
+<p>当然是用Lambda后，<code>eval</code>就可以简写为</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">eval</span><span class="params">(List&lt;Integer&gt; list, Predicate&lt;Integer&gt; predicate)</span> </span>{</span><br><span class="line">    list.stream().filter(predicate).forEach(System.out::println);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>java.util.Function 中共有43个接口。别指望能够全部记住它们，但是如果能记住其中6个基础接口，必要时就可以推断出其余接口了。</p>
+<ol>
+<li>基础接口作用于对象引用类型</li>
+<li>Operator 接口代表其结果与参数类型一致的函数</li>
+<li>Predicate 接口代表带有一个参数 并返回一个 boolean 的函数</li>
+<li>Function 接口代表其参数与返回的类型不一致的函数</li>
+<li>Supplier 接口代表没有参数并且返回（或“提供”）一个值的函数</li>
+<li>Consumer 表的是带有一个函数但不返回任何值的函数，相当于消费掉了其参数</li>
+</ol>
+<p>比如下面这个代码</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line">List&lt;Integer&gt; list = Arrays.asList(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>);</span><br><span class="line">list.stream().filter(a -&gt; a &gt; <span class="number">6</span>).forEach(System.out::println);</span><br></pre></td></tr></tbody></table></figure>
+
+<p>这是个很常见的用来打印大于6的值，我们来看下这个<code>filter</code>接口。</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">    * Returns a stream consisting of the elements of this stream that match</span></span><br><span class="line"><span class="comment">    * the given predicate.</span></span><br><span class="line"><span class="comment">    *</span></span><br><span class="line"><span class="comment">    * &lt;p&gt;This is an &lt;a href="package-summary.html#StreamOps"&gt;intermediate</span></span><br><span class="line"><span class="comment">    * operation&lt;/a&gt;.</span></span><br><span class="line"><span class="comment">    *</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> predicate a &lt;a href="package-summary.html#NonInterference"&gt;non-interfering&lt;/a&gt;,</span></span><br><span class="line"><span class="comment">    *                  &lt;a href="package-summary.html#Statelessness"&gt;stateless&lt;/a&gt;</span></span><br><span class="line"><span class="comment">    *                  predicate to apply to each element to determine if it</span></span><br><span class="line"><span class="comment">    *                  should be included</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span> the new stream</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line"><span class="function">Stream&lt;T&gt; <span class="title">filter</span><span class="params">(Predicate&lt;? <span class="keyword">super</span> T&gt; predicate)</span></span>;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>这里用到的就是我们的函数式编程。再比如</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">//求最大值</span></span><br><span class="line">Optional&lt;Integer&gt; max1 = list.stream().reduce(Integer::max);</span><br></pre></td></tr></tbody></table></figure>
+
+<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><span class="line">Optional&lt;T&gt; reduce(BinaryOperator&lt;T&gt; accumulator);</span><br></pre></td></tr></tbody></table></figure>
+
+<p>等等，java8给我们提供了大量的实例，告诉我们要尽量使用函数式编程。</p>
+<p>jdk8对于许多常用的类都扩展了一些面向函数，lambda表达式，方法引用的功能，使得java面向函数编程更为方便。其中Map.merge方法就是其中一个，merge方法有三个参数，<strong>key</strong>：map中的键，<strong>value</strong>：使用者传入的值，<strong>remappingFunction</strong>：BiFunction函数接口(该接口接收两个值，执行自定义功能并返回最终值)。当map中不存在指定的key时，便将传入的value设置为key的值，当key存在值时，执行一个方法该方法接收key的旧值和传入的value，执行自定义的方法返回最终结果设置为key的值。</p>
+<p>举个例子，当map中存在某个key，那么我们把value取出来加上新值，再存进去；传统办法是先判断，如果不存在key，则直接存，如果存在，则取出值加上新值，再把值重新put进去。当使用了merge后，我们的操作就简便多了</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> effectiveJava.functionTest;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MapMergeTest</span> </span>{</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</span><br><span class="line">        Map&lt;String, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        map.put(<span class="string">"id"</span>, <span class="number">1</span>);</span><br><span class="line">        map.merge(<span class="string">"id"</span>, <span class="number">1</span>, (oldValue, newValue) -&gt; oldValue + newValue);</span><br><span class="line">        map.merge(<span class="string">"name"</span>, <span class="number">1</span>, (oldValue, newValue) -&gt; oldValue + newValue);</span><br><span class="line">        System.out.println(map.toString());</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line">{name=<span class="number">1</span>, id=<span class="number">2</span>}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>与匿名类相比， Lambda 的主要优势在于更加简洁。Java 提供了生成比 Lambda 更简洁函数对象的方法：<strong>方法引用（method reference）</strong>。</p>
+<p>比如<code>map.merge("id", 1, (oldValue, newValue) -&gt; oldValue + newValue);</code>这段代码我们就可以简写为</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line">map.merge(<span class="string">"id"</span>, <span class="number">1</span>, Integer::sum);</span><br></pre></td></tr></tbody></table></figure>
+
+<p>记住一句话：<strong>只要方法引用更加简洁、清晰，就用方法引用；如果方法引用并不简洁，就坚持使用 Lambda。</strong></p>
+<h5 id="5，Stream"><a href="#5，Stream" class="headerlink" title="5，Stream"></a>5，Stream</h5><blockquote>
+<p><code>Stream</code>将要处理的元素集合看作一种流，在流的过程中，借助<code>Stream API</code>对流中的元素进行操作，比如：筛选、排序、聚合等。</p>
+</blockquote>
+<blockquote>
+<p><code>Optional</code>类是一个可以为<code>null</code>的容器对象。如果值存在则<code>isPresent()</code>方法会返回<code>true</code>，调用<code>get()</code>方法会返回该对象。</p>
+</blockquote>
+<p>我们先举个实例</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> effectiveJava.functionTest;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> lombok.AllArgsConstructor;</span><br><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"><span class="keyword">import</span> lombok.NoArgsConstructor;</span><br><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">import</span> java.util.stream.Collectors;</span><br><span class="line"><span class="keyword">import</span> java.util.stream.Stream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SteamTest</span> </span>{</span><br><span class="line">    <span class="keyword">static</span> List&lt;Person&gt; personList = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">list</span><span class="params">()</span> </span>{</span><br><span class="line">        personList.add(<span class="keyword">new</span> Person(<span class="string">"Tom"</span>, <span class="number">8900</span>, <span class="number">20</span>, <span class="string">"male"</span>, <span class="string">"New York"</span>));</span><br><span class="line">        personList.add(<span class="keyword">new</span> Person(<span class="string">"Jack"</span>, <span class="number">7000</span>, <span class="number">20</span>, <span class="string">"male"</span>, <span class="string">"Washington"</span>));</span><br><span class="line">        personList.add(<span class="keyword">new</span> Person(<span class="string">"Lily"</span>, <span class="number">7800</span>, <span class="number">20</span>, <span class="string">"female"</span>, <span class="string">"Washington"</span>));</span><br><span class="line">        personList.add(<span class="keyword">new</span> Person(<span class="string">"Anni"</span>, <span class="number">8200</span>, <span class="number">20</span>, <span class="string">"female"</span>, <span class="string">"New York"</span>));</span><br><span class="line">        personList.add(<span class="keyword">new</span> Person(<span class="string">"Owen"</span>, <span class="number">9500</span>, <span class="number">20</span>, <span class="string">"male"</span>, <span class="string">"New York"</span>));</span><br><span class="line">        personList.add(<span class="keyword">new</span> Person(<span class="string">"Alisa"</span>, <span class="number">7900</span>, <span class="number">20</span>, <span class="string">"female"</span>, <span class="string">"New York"</span>));</span><br><span class="line">    }</span><br><span class="line">    </span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="meta">@NoArgsConstructor</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> <span class="keyword">implements</span> <span class="title">Cloneable</span> </span>{</span><br><span class="line">    <span class="keyword">private</span> String name;  <span class="comment">// 姓名</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> salary; <span class="comment">// 薪资</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age; <span class="comment">// 年龄</span></span><br><span class="line">    <span class="keyword">private</span> String sex; <span class="comment">//性别</span></span><br><span class="line">    <span class="keyword">private</span> String area;  <span class="comment">// 地区</span></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> Object <span class="title">clone</span><span class="params">()</span> <span class="keyword">throws</span> CloneNotSupportedException </span>{</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.clone();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ol>
+<li><p>筛选（filter）</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testFilter</span><span class="params">()</span> </span>{</span><br><span class="line">    List&lt;Integer&gt; list = Arrays.asList(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">    list.stream().filter(a -&gt; a &gt; <span class="number">6</span>).forEach(System.out::println);</span><br><span class="line"></span><br><span class="line">    Optional&lt;Integer&gt; first = list.stream().filter(a -&gt; a &gt; <span class="number">6</span>).findFirst();</span><br><span class="line"></span><br><span class="line">    Optional&lt;Integer&gt; any = list.stream().filter(a -&gt; a &gt; <span class="number">6</span>).findAny();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 是否包含符合特定条件的元素</span></span><br><span class="line">    <span class="keyword">boolean</span> anyMatch = list.stream().anyMatch(x -&gt; x &lt; <span class="number">6</span>);</span><br><span class="line">    System.out.println(<span class="string">"匹配第一个值："</span> + first.get());</span><br><span class="line">    System.out.println(<span class="string">"匹配任意一个值："</span> + any.get());</span><br><span class="line">    System.out.println(<span class="string">"是否存在大于6的值："</span> + anyMatch);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>聚合（max/min/count）</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testMinMaxCount</span><span class="params">()</span> </span>{</span><br><span class="line">    List&lt;Integer&gt; list = Arrays.asList(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>);</span><br><span class="line">	<span class="comment">//最小值</span></span><br><span class="line">    Optional&lt;Integer&gt; min = list.stream().filter(a -&gt; a &gt; <span class="number">6</span>).min(Integer::compareTo);</span><br><span class="line">    System.out.println(min.get());</span><br><span class="line">	<span class="comment">//最大值</span></span><br><span class="line">    Optional&lt;Integer&gt; max = list.stream().filter(a -&gt; a &gt; <span class="number">6</span>).max(Comparator.comparingInt(a -&gt; a));</span><br><span class="line">    System.out.println(max.get());</span><br><span class="line">	<span class="comment">//长度</span></span><br><span class="line">    <span class="keyword">long</span> count = list.stream().filter(a -&gt; a &gt; <span class="number">6</span>).count();</span><br><span class="line">    System.out.println(count);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>映射（map/flatMap）</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * map：接收一个函数作为参数，该函数会被应用到每个元素上，并将其映射成一个新的元素。</span></span><br><span class="line"><span class="comment"> * flatMap：接收一个函数作为参数，将流中的每个值都换成另一个流，然后把所有流连接成一个流。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testMap</span><span class="params">()</span> </span>{</span><br><span class="line"></span><br><span class="line">    List&lt;String&gt; list = Arrays.asList(<span class="string">"abc"</span>, <span class="string">"def"</span>, <span class="string">"ghi"</span>, <span class="string">"jkl"</span>);</span><br><span class="line"></span><br><span class="line">    List&lt;String&gt; strList = list.stream().map(String::toUpperCase).collect(Collectors.toList());</span><br><span class="line">    System.out.println(strList.toString());</span><br><span class="line"></span><br><span class="line">    List&lt;Integer&gt; numList = Arrays.asList(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>);</span><br><span class="line">    List&lt;Integer&gt; newNumList = numList.stream().map(a -&gt; a + <span class="number">3</span>).collect(Collectors.toList());</span><br><span class="line">    System.out.println(newNumList.toString());</span><br><span class="line"></span><br><span class="line">    list();</span><br><span class="line">    <span class="comment">//不改变</span></span><br><span class="line">    List&lt;Person&gt; newPersonList = personList.stream().map(a -&gt; {</span><br><span class="line">        Person p = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> {</span><br><span class="line">            p = (Person) a.clone();</span><br><span class="line">        } <span class="keyword">catch</span> (CloneNotSupportedException e) {</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        }</span><br><span class="line">        p.setSalary(a.getSalary() + <span class="number">10000</span>);</span><br><span class="line">        <span class="keyword">return</span> p;</span><br><span class="line">    }).collect(Collectors.toList());</span><br><span class="line">    System.out.println(personList.toString());</span><br><span class="line">    System.out.println(newPersonList.toString());</span><br><span class="line"></span><br><span class="line">    <span class="comment">//改变</span></span><br><span class="line">    personList.stream().map(a -&gt; {</span><br><span class="line">        a.setSalary(a.getSalary() + <span class="number">10000</span>);</span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    }).collect(Collectors.toList());</span><br><span class="line">    System.out.println(personList.toString());</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    List&lt;String&gt; flatList = Arrays.asList(<span class="string">"m,k,l,a"</span>, <span class="string">"1,3,5,7"</span>);</span><br><span class="line"></span><br><span class="line">    List&lt;String&gt; newFlatList = flatList.stream().flatMap(a -&gt; {</span><br><span class="line">        String[] strArr = a.split(<span class="string">","</span>);</span><br><span class="line">        <span class="keyword">return</span> Arrays.stream(strArr);</span><br><span class="line">    }).collect(Collectors.toList());</span><br><span class="line">    System.out.println(flatList.toString());</span><br><span class="line">    System.out.println(newFlatList.toString());</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>归约（reduce）</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * reduce 归约</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testReduce</span><span class="params">()</span> </span>{</span><br><span class="line">    List&lt;Integer&gt; list = Arrays.asList(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//求和</span></span><br><span class="line">    Optional&lt;Integer&gt; sum = list.stream().reduce(Integer::sum);</span><br><span class="line">    System.out.println(sum.get());</span><br><span class="line"></span><br><span class="line">    <span class="comment">//求最大值</span></span><br><span class="line">    Optional&lt;Integer&gt; max1 = list.stream().reduce((a, b) -&gt; a &gt; b ? a : b);</span><br><span class="line">    Optional&lt;Integer&gt; max2 = list.stream().reduce(Integer::max);</span><br><span class="line">    Integer max3 = list.stream().reduce(<span class="number">100</span>, Integer::max);</span><br><span class="line">    System.out.println(max1.get());</span><br><span class="line">    System.out.println(max2.get());</span><br><span class="line">    System.out.println(max3);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>收集（collect）</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testCollect</span><span class="params">()</span> </span>{</span><br><span class="line">    list();</span><br><span class="line">    List&lt;Person&gt; newList = personList.stream().filter(a -&gt; a.getSalary() &gt; <span class="number">8000</span>).collect(Collectors.toList());</span><br><span class="line">    System.out.println(newList.toString());</span><br><span class="line"></span><br><span class="line">    List&lt;String&gt; nameList = personList.stream().filter(a -&gt; a.getSalary() &gt; <span class="number">8000</span>).map(Person::getName).collect(Collectors.toList());</span><br><span class="line">    System.out.println(nameList.toString());</span><br><span class="line"></span><br><span class="line">    Map&lt;String, Person&gt; nameMap = personList.stream().collect(Collectors.toMap(Person::getName, b -&gt; b, (oldValue, newValue) -&gt; newValue));</span><br><span class="line">    System.out.println(nameMap.toString());</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>统计（count/averaging）</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testAveraging</span><span class="params">()</span> </span>{</span><br><span class="line">    list();</span><br><span class="line">    <span class="comment">//求和</span></span><br><span class="line">    Long count = personList.stream().collect(Collectors.counting());</span><br><span class="line">    <span class="comment">//平均值</span></span><br><span class="line">    <span class="keyword">double</span> average = personList.stream().collect(Collectors.averagingDouble(Person::getSalary));</span><br><span class="line">    <span class="comment">//最大值</span></span><br><span class="line">    Optional&lt;Integer&gt; max = personList.stream().map(Person::getSalary).collect(Collectors.maxBy(Integer::compareTo));</span><br><span class="line">    <span class="comment">//求和</span></span><br><span class="line">    Integer sum = personList.stream().collect(Collectors.summingInt(Person::getSalary));</span><br><span class="line">    <span class="comment">//统计</span></span><br><span class="line">    DoubleSummaryStatistics statistics = personList.stream().collect(Collectors.summarizingDouble(Person::getSalary));</span><br><span class="line">    statistics.getMax();</span><br><span class="line">    statistics.getMin();</span><br><span class="line">    statistics.getCount();</span><br><span class="line">    statistics.getAverage();</span><br><span class="line">    statistics.getSum();</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>分组（partitioningBy/groupingBy）</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testGroupingBy</span><span class="params">()</span> </span>{</span><br><span class="line">    list();</span><br><span class="line">    Map&lt;Boolean, List&lt;Person&gt;&gt; map = personList.stream().collect(Collectors.partitioningBy(a -&gt; a.getSalary() &gt; <span class="number">8000</span>));</span><br><span class="line">    Map&lt;String, List&lt;Person&gt;&gt; sexMap = personList.stream().collect(Collectors.groupingBy(Person::getSex));</span><br><span class="line"></span><br><span class="line">    Map&lt;String, Map&lt;String, List&lt;Person&gt;&gt;&gt; tmp =</span><br><span class="line">        personList.stream().collect(Collectors.groupingBy(Person::getSex, Collectors.groupingBy(Person::getArea)));</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>接合（joining）</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testJoin</span><span class="params">()</span> </span>{</span><br><span class="line">    list();</span><br><span class="line">    String str = personList.stream().map(Person::getName).collect(Collectors.joining(<span class="string">","</span>));</span><br><span class="line">    System.out.println(str);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>排序（sorted）</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 排序</span></span><br><span class="line"><span class="comment"> * sorted()：自然排序，流中元素需实现Comparable接口</span></span><br><span class="line"><span class="comment"> * sorted(Comparator com)：Comparator排序器自定义排序</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testSorted</span><span class="params">()</span> </span>{</span><br><span class="line">    list();</span><br><span class="line">    <span class="comment">//正序</span></span><br><span class="line">    List&lt;Person&gt; newList = personList.stream().sorted(Comparator.comparingInt(Person::getSalary)).collect(Collectors.toList());</span><br><span class="line">    System.out.println(newList.toString());</span><br><span class="line">    <span class="comment">//倒序</span></span><br><span class="line">    List&lt;Integer&gt; newList2 = personList.stream().map(Person::getSalary).sorted(Comparator.comparingInt(a -&gt; (<span class="keyword">int</span>) a).reversed()).collect(Collectors.toList());</span><br><span class="line">    System.out.println(newList2.toString());</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>提取/组合</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testDistinct</span><span class="params">()</span> </span>{</span><br><span class="line">    String[] arr1 = {<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>, <span class="string">"d"</span>};</span><br><span class="line">    String[] arr2 = {<span class="string">"d"</span>, <span class="string">"e"</span>, <span class="string">"f"</span>, <span class="string">"g"</span>};</span><br><span class="line"></span><br><span class="line">    List&lt;String&gt; strList = <span class="keyword">new</span> ArrayList&lt;&gt;(Arrays.asList(arr1));</span><br><span class="line"></span><br><span class="line">    Stream&lt;String&gt; stream1 = Stream.of(arr1);</span><br><span class="line">    Stream&lt;String&gt; stream2 = Stream.of(arr2);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// concat:合并两个流</span></span><br><span class="line">    <span class="comment">// distinct：去重</span></span><br><span class="line">    List&lt;String&gt; list = Stream.concat(stream1, stream2).distinct().collect(Collectors.toList());</span><br><span class="line">    System.out.println(list);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// limit：限制从流中获得前n个数据</span></span><br><span class="line">    List&lt;String&gt; list2 = strList.stream().limit(<span class="number">2</span>).collect(Collectors.toList());</span><br><span class="line">    System.out.println(list2.toString());</span><br><span class="line"></span><br><span class="line">    <span class="comment">// skip：跳过前n个数据</span></span><br><span class="line">    List&lt;String&gt; list3 = strList.stream().skip(<span class="number">1</span>).limit(<span class="number">2</span>).collect(Collectors.toList());</span><br><span class="line">    System.out.println(list3.toString());</span><br><span class="line"></span><br><span class="line">    <span class="comment">// iterate：遍历</span></span><br><span class="line">    List&lt;Integer&gt; list4 = Stream.iterate(<span class="number">1</span>, x -&gt; x + <span class="number">2</span>).skip(<span class="number">1</span>).limit(<span class="number">5</span>).collect(Collectors.toList());</span><br><span class="line">    System.out.println(list4);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+</li>
 </ol>
 ]]></content>
       <tags>
