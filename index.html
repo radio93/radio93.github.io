@@ -218,7 +218,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-11-14 15:09:46" itemprop="dateModified" datetime="2020-11-14T15:09:46+08:00">2020-11-14</time>
+                <time title="修改时间：2020-11-14 15:29:55" itemprop="dateModified" datetime="2020-11-14T15:29:55+08:00">2020-11-14</time>
               </span>
 
           
@@ -523,7 +523,7 @@
 
 <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Optional&lt;T&gt; reduce(BinaryOperator&lt;T&gt; accumulator);</span><br></pre></td></tr></tbody></table></figure>
 
-<p>等等，java8给我们提供了大量的实例，告诉我们要尽量使用函数式编程。</p>
+<p>等等，java8给我们提供了大量的示例，告诉我们要尽量使用函数式编程。</p>
 <p>jdk8对于许多常用的类都扩展了一些面向函数，lambda表达式，方法引用的功能，使得java面向函数编程更为方便。其中Map.merge方法就是其中一个，merge方法有三个参数，<strong>key</strong>：map中的键，<strong>value</strong>：使用者传入的值，<strong>remappingFunction</strong>：BiFunction函数接口(该接口接收两个值，执行自定义功能并返回最终值)。当map中不存在指定的key时，便将传入的value设置为key的值，当key存在值时，执行一个方法该方法接收key的旧值和传入的value，执行自定义的方法返回最终结果设置为key的值。</p>
 <p>举个例子，当map中存在某个key，那么我们把value取出来加上新值，再存进去；传统办法是先判断，如果不存在key，则直接存，如果存在，则取出值加上新值，再把值重新put进去。当使用了merge后，我们的操作就简便多了</p>
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> effectiveJava.functionTest;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MapMergeTest</span> </span>{</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</span><br><span class="line">        Map&lt;String, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        map.put(<span class="string">"id"</span>, <span class="number">1</span>);</span><br><span class="line">        map.merge(<span class="string">"id"</span>, <span class="number">1</span>, (oldValue, newValue) -&gt; oldValue + newValue);</span><br><span class="line">        map.merge(<span class="string">"name"</span>, <span class="number">1</span>, (oldValue, newValue) -&gt; oldValue + newValue);</span><br><span class="line">        System.out.println(map.toString());</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
