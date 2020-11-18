@@ -716,9 +716,10 @@ while (!stopRequest) {
 转变成这样：
 
 ```java
-if (!stopRequest)
-while(true){
-	i++;    
+if (!stopRequest){
+    while(true){
+		i++;    
+	}
 }
 ```
 
