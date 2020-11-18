@@ -187,6 +187,134 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://radio93.github.io/2020/10/28/Executors%E7%BA%BF%E7%A8%8B%E6%B1%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="radio">
+      <meta itemprop="description" content="千门明月，天如水，正是人间佳节。开尽小梅春气透，花烛家家罗列。来往绮罗，喧阗箫鼓，达旦何曾歇。少年当此，风光真是殊绝。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Radio">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/10/28/Executors%E7%BA%BF%E7%A8%8B%E6%B1%A0/" class="post-title-link" itemprop="url">Executors线程池</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-10-28 14:21:17" itemprop="dateCreated datePublished" datetime="2020-10-28T14:21:17+08:00">2020-10-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-11-03 10:05:57" itemprop="dateModified" datetime="2020-11-03T10:05:57+08:00">2020-11-03</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h5 id="newCachedThreadPool"><a href="#newCachedThreadPool" class="headerlink" title="newCachedThreadPool"></a>newCachedThreadPool</h5><p>创建一个可缓存的线程池</p>
+<blockquote>
+<p>如果线程池的大小超过了处理任务所需要的线程，那么就会回收部分空闲（60秒不执行任务）的线程，当任务数增加时，此线程池又可以智能的添加新线程来处理任务。此线程池不会对线程池大小做限制，线程池大小完全依赖于操作系统（或者说JVM）能够创建的最大线程大小。</p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> ExecutorService executor = Executors.newCachedThreadPool();</span><br><span class="line">executor.submit(<span class="keyword">new</span> Runnable() {</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span> <span class="params">()</span> </span>{</span><br><span class="line">		<span class="comment">//TODO</span></span><br><span class="line">	}</span><br><span class="line">});</span><br></pre></td></tr></tbody></table></figure>
+
+<h5 id="newFixedThreadPool"><a href="#newFixedThreadPool" class="headerlink" title="newFixedThreadPool"></a>newFixedThreadPool</h5><p>创建固定大小的线程池</p>
+<blockquote>
+<p>每次提交一个任务就创建一个线程，直到线程达到线程池的最大大小。线程池的大小一旦达到最大值就会保持不变，如果某个线程因为执行异常而结束，那么线程池会补充一个新线程。</p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.ExecutorService;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.Executors;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FixedThreadPoolDemo</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>{</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> index;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">FixedThreadPoolDemo</span><span class="params">(<span class="keyword">int</span> index)</span> </span>{</span><br><span class="line">        <span class="keyword">this</span>.index = index;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</span><br><span class="line">        ExecutorService service = Executors.newFixedThreadPool(<span class="number">2</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) {</span><br><span class="line">            service.execute(<span class="keyword">new</span> FixedThreadPoolDemo(i));</span><br><span class="line">        }</span><br><span class="line">        System.out.println(<span class="string">"finish"</span>);</span><br><span class="line">        service.shutdown();</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{</span><br><span class="line">        <span class="keyword">try</span> {</span><br><span class="line">            System.out.println(Thread.currentThread().getName());</span><br><span class="line">        } <span class="keyword">catch</span> (Exception e) {</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">finish</span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">2</span></span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">1</span></span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">1</span></span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">1</span></span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">2</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h5 id="newSingleThreadExecutor"><a href="#newSingleThreadExecutor" class="headerlink" title="newSingleThreadExecutor"></a>newSingleThreadExecutor</h5><p>创建一个单线程的线程池</p>
+<blockquote>
+<p>  这个线程池只有一个线程在工作，也就是相当于单线程串行执行所有任务。如果这个唯一的线程因为异常结束，那么会有一个新的线程来替代它。此线程池保证所有任务的执行顺序按照任务的提交顺序执行。</p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.ExecutorService;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.Executors;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingleThreadPoolDemo</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>{</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> index;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SingleThreadPoolDemo</span><span class="params">(<span class="keyword">int</span> index)</span> </span>{</span><br><span class="line">        <span class="keyword">this</span>.index = index;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</span><br><span class="line">        ExecutorService service = Executors.newSingleThreadExecutor();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) {</span><br><span class="line">            service.execute(<span class="keyword">new</span> SingleThreadPoolDemo(i));</span><br><span class="line">        }</span><br><span class="line">        System.out.println(<span class="string">"finish"</span>);</span><br><span class="line">        service.shutdown();</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{</span><br><span class="line">        <span class="keyword">try</span> {</span><br><span class="line">            System.out.println(Thread.currentThread().getName());</span><br><span class="line">        } <span class="keyword">catch</span> (Exception e) {</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">finish</span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">1</span></span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">1</span></span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">1</span></span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">1</span></span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">1</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h5 id="newScheduledThreadPool"><a href="#newScheduledThreadPool" class="headerlink" title="newScheduledThreadPool"></a>newScheduledThreadPool</h5><p>创建一个周期任务线程池</p>
+<blockquote>
+<p>此线程池支持定时以及周期性执行任务的需求</p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.Executors;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.ScheduledExecutorService;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ScheduledThreadPoolDemo</span> </span>{</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</span><br><span class="line">        ScheduledExecutorService service = Executors.newScheduledThreadPool(<span class="number">1</span>);</span><br><span class="line">        service.schedule(() -&gt; System.out.println(Thread.currentThread().getName()), <span class="number">2</span>, TimeUnit.SECONDS);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>运行结果(该程序表示延迟2s执行)：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pool-1-thread-1</span><br></pre></td></tr></tbody></table></figure>
+
+<h5 id="scheduleAtFixedRate"><a href="#scheduleAtFixedRate" class="headerlink" title="scheduleAtFixedRate"></a>scheduleAtFixedRate</h5><p>周期线程中的定时任务</p>
+<p>示例：</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.Executors;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.ScheduledExecutorService;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ScheduledThreadPoolDemo</span> </span>{</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</span><br><span class="line">        ScheduledExecutorService service = Executors.newScheduledThreadPool(<span class="number">1</span>);</span><br><span class="line">        service.scheduleAtFixedRate(() -&gt; System.out.println(Thread.currentThread().getName()), <span class="number">5</span>, <span class="number">2</span>,TimeUnit.SECONDS);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>运行结果(该程序表示程序启动5s后，每隔2s执行一次)：</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">pool-<span class="number">1</span>-thread-<span class="number">1</span></span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">1</span></span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">1</span></span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br></pre></td></tr></tbody></table></figure>
+
+<h5 id="scheduleWithFixedDelay"><a href="#scheduleWithFixedDelay" class="headerlink" title="scheduleWithFixedDelay"></a>scheduleWithFixedDelay</h5><p>周期线程中的定时任务</p>
+<p>示例：</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.Executors;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.ScheduledExecutorService;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ScheduledThreadPoolDemo</span> </span>{</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</span><br><span class="line">        ScheduledExecutorService service = Executors.newScheduledThreadPool(<span class="number">1</span>);</span><br><span class="line">        service.scheduleWithFixedDelay(() -&gt; System.out.println(Thread.currentThread().getName()), <span class="number">5</span>, <span class="number">2</span>,TimeUnit.SECONDS);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>运行结果</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">pool-<span class="number">1</span>-thread-<span class="number">1</span></span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">1</span></span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">1</span></span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br></pre></td></tr></tbody></table></figure>
+
+<blockquote>
+<p>说明：scheduleAtFixedRate和scheduleWithFixedDelay的区别在于前者是时间间隔过后，再检查任务是否结束，如果结束了，立即执行下个任务，后者是先等待任务结束，然后再等待时间间隔过后再执行。</p>
+</blockquote>
+<h5 id="newSingleThreadScheduledExecutor"><a href="#newSingleThreadScheduledExecutor" class="headerlink" title="newSingleThreadScheduledExecutor"></a>newSingleThreadScheduledExecutor</h5><p>定时任务</p>
+<p>示例：</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.Executors;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.ScheduledExecutorService;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingleThreadScheduledPoolDemo</span> </span>{</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</span><br><span class="line">        ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();</span><br><span class="line">        service.scheduleAtFixedRate(() -&gt; System.out.println(Thread.currentThread().getName()), <span class="number">5</span>, <span class="number">2</span>,TimeUnit.SECONDS);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>运行结果(该程序表示程序启动5s后，每隔2s执行一次)：</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">pool-<span class="number">1</span>-thread-<span class="number">1</span></span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">1</span></span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">1</span></span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br></pre></td></tr></tbody></table></figure>
+
+<blockquote>
+<p>ScheduledExecutorService执行的周期任务，如果执行过程中抛出了异常，那么任务就会停止，周期也会停止。</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://radio93.github.io/2020/10/27/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -424,7 +552,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-count">33</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
