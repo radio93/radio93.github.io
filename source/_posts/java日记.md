@@ -677,3 +677,118 @@ class Person implements Cloneable {
     }
     ```
 
+##### 6，同步访问共享的可变数据
+
+举个例子
+
+```java
+package effectiveJava.functionTest;
+
+import java.util.concurrent.TimeUnit;
+
+public class StopThread {
+    private static boolean stopRequest;
+
+    public static void main(String[] args) throws InterruptedException {
+        Thread t = new Thread(() -> {
+            int i = 0;
+            while (!stopRequest) {
+                i++;
+            }
+        });
+        t.start();
+        TimeUnit.SECONDS.sleep(1);
+        stopRequest = true;
+    }
+}
+```
+
+你可能期待这个程序运行大约一秒钟左右，之后主线程将 stopRequest 设置为 true ，致使后台线程的循环终止。但是实际上，这个程序永远不会终止：因为后台 线程永远在循环！
+
+问题在于，由于没有同步，就不能保证后台线程何时‘看到’主线程对 stopRequest 的值所做的改变。没有同步，虚拟机将以下代码：
+
+```java
+while (!stopRequest) {
+    i++;
+}
+```
+
+转变成这样：
+
+```java
+if (!stopRequest)
+while(true){
+	i++;    
+}
+```
+
+这种优化称作**提升（ hoisting ）**，正是 OpenJDK Server VM的工作 结果是一个**活性失败 (liveness failure ）**：这个程序并没有得到提升。
+
+修正这个问题的一种方式是同步访问`stopRequest`域。
+
+```java
+package effectiveJava.functionTest;
+
+import java.util.concurrent.TimeUnit;
+
+public class StopThread {
+    private static volatile boolean stopRequest;
+
+    private static synchronized void setStopRequest() {
+        stopRequest = true;
+    }
+
+    private static synchronized boolean getStopRequest() {
+        return stopRequest;
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        Thread t = new Thread(() -> {
+            int i = 0;
+            while (!getStopRequest()) {
+                i++;
+            }
+        });
+
+        t.start();
+        TimeUnit.SECONDS.sleep(1);
+        setStopRequest();
+    }
+}
+```
+
+注意，我们的**读和写操作都要同步**，否则无法保证同步起作用。
+
+还有一种方式就是`volatile`关键字，虽然 volatile 修饰符不执行互斥访问，但它可以保证任何一个线程在读取该域的时候都将看到最近刚刚被写入的值：
+
+```java
+package effectiveJava.functionTest;
+
+import java.util.concurrent.TimeUnit;
+
+public class StopThread {
+    private static volatile boolean stopRequest;
+
+    public static void main(String[] args) throws InterruptedException {
+        Thread t = new Thread(() -> {
+            int i = 0;
+            while (!stopRequest) {
+                i++;
+            }
+        });
+
+        t.start();
+        TimeUnit.SECONDS.sleep(1);
+        stopRequest = true;
+    }
+}
+```
+
+在使用volatile关键字的时候，我们需要特别注意，不能使用i++（增量操作符）的操作，因为这个操作**不是原子的**。这个操作域中执行两项操作：首先它读取值，然后写回一个新值，相当于原来的值再加上1。如果第二个线程在第一个线程读取旧值和写回新值期间读取这个域，第二个线程就会与第一个线程一起看到同一个值，并返回相同的序列号，这就是**安全性失败（ safety failure ）**：这个程序会计算出错误的结果。修复方法是用synchronized来代替volatile。当然最好的办法是替换成原子类java.util.concurrent.atomic。
+
+```java
+Atomiclang i =new Atomiclong(); 
+i.getAndincrement();
+```
+
+总而言之， **当多个线程共享可变数据的时候，每个读或者写数据的线程都必须执行同步。**
