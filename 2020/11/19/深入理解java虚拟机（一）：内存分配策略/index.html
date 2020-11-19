@@ -35,7 +35,7 @@
 <meta property="og:image" content="https://radio93.oss-cn-beijing.aliyuncs.com/gitbub/image-20201119194852586.png?x-oss-process=style/radio93">
 <meta property="og:image" content="https://radio93.oss-cn-beijing.aliyuncs.com/gitbub/image-20201119202121202.png?x-oss-process=style/radio93">
 <meta property="article:published_time" content="2020-11-19T09:03:54.000Z">
-<meta property="article:modified_time" content="2020-11-19T12:44:16.654Z">
+<meta property="article:modified_time" content="2020-11-19T12:50:19.100Z">
 <meta property="article:author" content="radio">
 <meta property="article:tag" content="java">
 <meta name="twitter:card" content="summary">
@@ -223,7 +223,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-11-19 17:03:54 / 修改时间：20:44:16" itemprop="dateCreated datePublished" datetime="2020-11-19T17:03:54+08:00">2020-11-19</time>
+              <time title="创建时间：2020-11-19 17:03:54 / 修改时间：20:50:19" itemprop="dateCreated datePublished" datetime="2020-11-19T17:03:54+08:00">2020-11-19</time>
             </span>
 
           
@@ -246,7 +246,7 @@
       
         <h5 id="引用计数算法"><a href="#引用计数算法" class="headerlink" title="引用计数算法"></a>引用计数算法</h5><p>很多教科书判断对象是否存活的算法是这样的：在对象中添加一个引用计数器，每当有一个地方引用它时，计数器值就加一；当引用失效时，计数器值就减一；这种说法是错误的，</p>
 <p>引用计数算法（Reference Counting）虽然占用了一些额外的内存空间来进行计数，但它的原理简单，判定效率也很高，在大多数情况下它都是一个不错的算法。也有一些比较著名的应用案例，例如微软COM（Component Object Model）技术、使用ActionScript 3的FlashPlayer、Python语言以及在游戏脚本领域得到许多应用的Squirrel中都使用了引用计数算法进行内存管理。但是，在Java领域，至少主流的Java虚拟机里面都没有选用引用计数算法来管理内存，主要原因是，这个看似简单的算法有很多例外情况要考虑，必须要配合大量额外处理才能保证正确地工作，譬如单纯的引用计数就很难解决对象之间相互循环引用的问题。</p>
-<p>举个简单的例子：对象objA和objB都有字段instance，赋值令objA.instance=objB及objB.instance=objA，除此之外，这两个对象再无任何引用，实际上这两个对象已经不可能再被访问，但是它们因为互相引用着对方，导致它们的引用计数都不为零，引用计数算法也就无法回收它们。所以Java虚拟机并不是通过引用计数算法来判断对象是否存活的。</p>
+<p>举个简单的例子：对象objA和objB都有字段instance，赋值令objA.instance=objB及objB.instance=objA，除此之外，这两个对象再无任何引用，实际上这两个对象已经不可能再被访问，但是它们因为互相引用着对方，导致它们的引用计数都不为零，引用计数算法也就无法回收它们。所以Java虚拟机并不是通过引用计数算法来判断对象是否存活的。哎哎哎</p>
 <h5 id="可达性分析算法"><a href="#可达性分析算法" class="headerlink" title="可达性分析算法"></a>可达性分析算法</h5><p>当前主流的商用程序语言（Java、C#，上溯至前面提到的古老的Lisp）的内存管理子系统，都是通过可达性分析（Reachability Analysis）算法来判定对象是否存活的。这个算法的基本思路就是通过一系列称为“GC Roots”的根对象作为起始节点集，从这些节点开始，根据引用关系向下搜索，搜索过程所走过的路径称为“引用链”（Reference Chain），如果某个对象到GC Roots间没有任何引用链相连，或者用图论的话来说就是从GC Roots到这个对象不可达时，则证明此对象是不可能再被使用的。</p>
 <p><img src="https://radio93.oss-cn-beijing.aliyuncs.com/gitbub/image-20201119170850993.png?x-oss-process=style/radio93" alt="image-20201119170850993"></p>
 <p>如图所示，对象object 5、object 6、object 7虽然互有关联，但是它们到GC Roots是不可达的，因此它们将会被判定为可回收的对象。</p>
