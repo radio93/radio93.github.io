@@ -285,3 +285,11 @@ JNI global references: 1124
 
 ![image-20201125172630917](https://radio93.oss-cn-beijing.aliyuncs.com/gitbub/image-20201125172630917.png?x-oss-process=style/radio93)
 
+附带两个常用命令
+
+根据端口号查询 具体进程信息。
+`netstat -ano |findstr 8080`
+杀掉某个进程。（加-F强制杀除，英文意思为Force ）。
+`taskkill -PID 7276 -F`
+
+随着jdk的更新，后面的jdk9以及之后的版本也逐渐出现各种可视化的性能监控工具，比如JHSDB：基于服务性代理的调试工具；JConsole：Java监视与管理控制台；VisualVM：多合-故障处理工具；Java Mission Control：可持续在线的监控工具等等等等。
