@@ -187,6 +187,100 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://radio93.github.io/2020/11/02/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="radio">
+      <meta itemprop="description" content="千门明月，天如水，正是人间佳节。开尽小梅春气透，花烛家家罗列。来往绮罗，喧阗箫鼓，达旦何曾歇。少年当此，风光真是殊绝。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Radio">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/11/02/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">原型模式</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-11-02 20:08:20" itemprop="dateCreated datePublished" datetime="2020-11-02T20:08:20+08:00">2020-11-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-12-12 10:49:10" itemprop="dateModified" datetime="2020-12-12T10:49:10+08:00">2020-12-12</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="原型模式"><a href="#原型模式" class="headerlink" title="原型模式"></a>原型模式</h2><blockquote>
+<p>原型模式（Prototype Pattern）是用于创建重复的对象，同时又能保证性能。这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。</p>
+<p>这种模式是实现了一个原型接口，该接口用于创建当前对象的克隆。当直接创建对象的代价比较大时，则采用这种模式。例如，一个对象需要在一个高代价的数据库操作之后被创建。我们可以缓存该对象，在下一个请求时返回它的克隆，在需要的时候更新数据库，以此来减少数据库调用。</p>
+</blockquote>
+<h5 id="示例演示："><a href="#示例演示：" class="headerlink" title="示例演示："></a>示例演示：</h5><ol>
+<li><p>创建一个抽象类，实现Cloneable接口，提供一个抽象方法，重写Object的clone方法</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test.prototype;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">People</span> <span class="keyword">implements</span> <span class="title">Cloneable</span> </span>{</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Integer id;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> String type;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">say</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">clone</span><span class="params">()</span> </span>{</span><br><span class="line">        Object clone = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> {</span><br><span class="line">            clone = <span class="keyword">super</span>.clone();</span><br><span class="line">        } <span class="keyword">catch</span> (CloneNotSupportedException e) {</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> clone;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>创建两个people实体类</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test.prototype;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PeopleOne</span> <span class="keyword">extends</span> <span class="title">People</span></span>{</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">PeopleOne</span><span class="params">()</span></span>{</span><br><span class="line">        type=<span class="string">"peopleone"</span>;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">say</span><span class="params">()</span> </span>{</span><br><span class="line">        System.out.println(<span class="string">"my name is peopleone"</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test.prototype;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PeopleTwo</span> <span class="keyword">extends</span> <span class="title">People</span></span>{</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">PeopleTwo</span><span class="params">()</span></span>{</span><br><span class="line">        type=<span class="string">"peopletwo"</span>;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">say</span><span class="params">()</span> </span>{</span><br><span class="line">        System.out.println(<span class="string">"my name is peopletwo"</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>创建一个存放原型对象的注册表，提供一个获取新实例的方法，用来复制原型，默认初始化两个实例</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test.prototype;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Hashtable;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PeopleCache</span> </span>{</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Hashtable&lt;Integer, People&gt; peopleMap = <span class="keyword">new</span> Hashtable&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> People <span class="title">getPeople</span><span class="params">(Integer id)</span> </span>{</span><br><span class="line">        People people = peopleMap.get(id);</span><br><span class="line">        <span class="comment">//复制一个新的实例，属于浅拷贝</span></span><br><span class="line">        <span class="keyword">return</span> (People) people.clone();</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">loadCache</span><span class="params">()</span> </span>{</span><br><span class="line">        PeopleOne peopleOne = <span class="keyword">new</span> PeopleOne();</span><br><span class="line">        peopleOne.setId(<span class="number">1</span>);</span><br><span class="line">        peopleMap.put(peopleOne.getId(), peopleOne);</span><br><span class="line"></span><br><span class="line">        PeopleTwo peopleTwo = <span class="keyword">new</span> PeopleTwo();</span><br><span class="line">        peopleTwo.setId(<span class="number">2</span>);</span><br><span class="line">        peopleMap.put(peopleTwo.getId(), peopleTwo);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>完成上述步骤，我们就可以开始演示了</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test.prototype;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PrototypeDemo</span> </span>{</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</span><br><span class="line">        PeopleCache.loadCache();</span><br><span class="line">        People peopleOne = PeopleCache.getPeople(<span class="number">1</span>);</span><br><span class="line">        System.out.println(peopleOne.type);</span><br><span class="line">        peopleOne.say();</span><br><span class="line"></span><br><span class="line">        People peopleTwo = PeopleCache.getPeople(<span class="number">2</span>);</span><br><span class="line">        System.out.println(peopleTwo.type);</span><br><span class="line">        peopleTwo.say();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>新生成的两个实例就是通过原型clone出来的</p>
+<p>运行结果：</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">peopleone</span><br><span class="line">my name is peopleone</span><br><span class="line">peopletwo</span><br><span class="line">my name is peopletwo</span><br></pre></td></tr></tbody></table></figure>
+
+
+</li>
+</ol>
+<h5 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h5><blockquote>
+<p><strong>优点：</strong> 1、性能提高。 2、逃避构造函数的约束。</p>
+<p><strong>缺点：</strong> 1、配备克隆方法需要对类的功能进行通盘考虑，这对于全新的类不是很难，但对于已有的类不一定很容易，特别当一个类引用不支持串行化的间接对象，或者引用含有循环结构的时候。 2、必须实现 Cloneable 接口。</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://radio93.github.io/2020/11/02/%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -218,7 +312,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-11-03 10:05:57" itemprop="dateModified" datetime="2020-11-03T10:05:57+08:00">2020-11-03</time>
+                <time title="修改时间：2020-12-12 10:44:41" itemprop="dateModified" datetime="2020-12-12T10:44:41+08:00">2020-12-12</time>
               </span>
 
           
@@ -267,12 +361,13 @@
 <p>运行结果：</p>
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Item: my name is peopleOne</span><br><span class="line">say：people say</span><br><span class="line">height：<span class="number">100</span></span><br><span class="line">Item: my name is peopleTwo</span><br><span class="line">say：people say</span><br><span class="line">height：<span class="number">200</span></span><br><span class="line">Item: my name is animalOne</span><br><span class="line">say：animal say</span><br><span class="line">height：<span class="number">50</span></span><br><span class="line">身高和：<span class="number">350</span></span><br><span class="line">---------------------------------</span><br><span class="line">Item: my name is peopleTwo</span><br><span class="line">say：people say</span><br><span class="line">height：<span class="number">200</span></span><br><span class="line">Item: my name is animalTwo</span><br><span class="line">say：animal say</span><br><span class="line">height：<span class="number">100</span></span><br><span class="line">身高和：<span class="number">300</span></span><br></pre></td></tr></tbody></table></figure>
 
+
+</li>
+</ol>
 <h5 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h5><blockquote>
 <p><strong>优点：</strong>1、建造者独立，易扩展。 2、便于控制细节风险。</p>
 <p><strong>缺点：</strong> 1、产品必须有共同点，范围有限制。 2、如内部变化复杂，会有很多的建造类。</p>
 </blockquote>
-</li>
-</ol>
 
       
     </div>
@@ -323,7 +418,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-11-03 17:02:52" itemprop="dateModified" datetime="2020-11-03T17:02:52+08:00">2020-11-03</time>
+                <time title="修改时间：2020-12-12 10:54:26" itemprop="dateModified" datetime="2020-12-12T10:54:26+08:00">2020-12-12</time>
               </span>
 
           
@@ -373,12 +468,13 @@
 <p>运行结果：</p>
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">people say</span><br><span class="line">animal say</span><br><span class="line">male</span><br><span class="line">female</span><br></pre></td></tr></tbody></table></figure>
 
+
+</li>
+</ol>
 <h5 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h5><blockquote>
 <p><strong>优点：</strong>当一个产品族中的多个对象被设计成一起工作时，它能保证客户端始终只使用同一个产品族中的对象。</p>
 <p><strong>缺点：</strong>产品族扩展非常困难，要增加一个系列的某一产品，既要在抽象的 Creator 里加代码，又要在具体的里面加代码。</p>
 </blockquote>
-</li>
-</ol>
 
       
     </div>
@@ -521,7 +617,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-11-03 10:05:57" itemprop="dateModified" datetime="2020-11-03T10:05:57+08:00">2020-11-03</time>
+                <time title="修改时间：2020-12-14 11:25:19" itemprop="dateModified" datetime="2020-12-14T11:25:19+08:00">2020-12-14</time>
               </span>
 
           
@@ -555,11 +651,12 @@
 <p>运行结果：</p>
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">my name is :d第一次创建</span><br><span class="line">my name is :d从池中取出</span><br><span class="line">my name is :a第一次创建</span><br><span class="line">my name is :b第一次创建</span><br><span class="line">my name is :c第一次创建</span><br><span class="line">my name is :c从池中取出</span><br><span class="line">my name is :c从池中取出</span><br><span class="line">my name is :c从池中取出</span><br><span class="line">my name is :a从池中取出</span><br><span class="line">my name is :d从池中取出</span><br></pre></td></tr></tbody></table></figure>
 
+
+</li>
+</ol>
 <h5 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h5><blockquote>
 <p>在有大量对象时，有可能会造成内存溢出，我们把其中共同的部分抽象出来，如果有相同的业务请求，直接返回在内存中已有的对象，避免重新创建。大大减少对象的创建，降低系统的内存，使效率提高；缺点是提高了系统的复杂度，需要分离出外部状态和内部状态，而且外部状态具有固有化的性质，不应该随着内部状态的变化而变化，否则会造成系统的混乱。</p>
 </blockquote>
-</li>
-</ol>
 
       
     </div>
@@ -610,7 +707,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-11-03 10:05:57" itemprop="dateModified" datetime="2020-11-03T10:05:57+08:00">2020-11-03</time>
+                <time title="修改时间：2020-12-14 11:09:24" itemprop="dateModified" datetime="2020-12-14T11:09:24+08:00">2020-12-14</time>
               </span>
 
           
@@ -676,11 +773,12 @@
 <p>运行结果：</p>
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">animal say</span><br><span class="line">say animal</span><br></pre></td></tr></tbody></table></figure>
 
+
+</li>
+</ol>
 <h5 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h5><blockquote>
 <p>以上就是装饰器模式，这种模式的出现是为了更好的拓展功能，而尽可能的减小原结构的改造，各个类都可以独立发展，互相不耦合；缺点就是随着功能的多样化，子类会变得越来越复杂。</p>
 </blockquote>
-</li>
-</ol>
 
       
     </div>
@@ -1065,7 +1163,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">38</span>
+          <span class="site-state-item-count">39</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
