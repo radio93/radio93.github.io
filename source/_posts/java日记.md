@@ -793,3 +793,77 @@ i.getAndincrement();
 ```
 
 总而言之， **当多个线程共享可变数据的时候，每个读或者写数据的线程都必须执行同步。**
+
+##### 7，要注意程序计算溢出
+
+比如下面这个代码
+
+```java
+package test;
+
+public class Add {
+
+	public static void main(String[] args) {
+
+		int num1 = Integer.MAX_VALUE;
+		int num2 = Integer.MAX_VALUE;
+		System.out.println(num1+num2);
+
+	}
+}
+```
+
+它的输出结果是`-2`，发生溢出后，既没有抛出异常，也没有任何提示。所以我们在写**计算**的时候一定要注意。
+
+再比如下面这个计算：
+
+```java
+package test;
+
+public class Add {
+
+	public static void main(String[] args) {
+
+		long l = 5 * 2147483647;
+		long m = (long) 5 * 2147483647;
+		System.out.println(l);//输出：2147483643
+		System.out.println(m);//输出：10737418235
+
+	}
+}
+```
+
+##### 8，注意finally和return的关系
+
+在try-finally语法中，我们都知道finally是肯定会执行的。那如果try里面有return；finally将会在return前执行。但是对引用类型和值类型的数据修改效果是不一样的。
+
+```java
+static int finally1(){
+    int num =0;
+    try {
+        return num;//0;
+    }finally {
+        num++;
+    }
+}
+
+static List<Integer> finally2(){
+    List<Integer> nums =new ArrayList<>();
+    try {
+        return nums;//[1]
+    }finally {
+        nums.add(1);
+    }
+}
+```
+
+##### 9，数值字面量
+
+当我们程序中有一些大数值的参数时，允许在数字之间插入下划线，方便我们阅读，对数值没有任何影响。
+
+```java
+int a = 100_00_00;
+float b = 1_00f;
+double c = 1_00;
+```
+
