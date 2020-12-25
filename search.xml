@@ -1621,6 +1621,19 @@
 <figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line">Atomiclang i =<span class="keyword">new</span> Atomiclong(); </span><br><span class="line">i.getAndincrement();</span><br></pre></td></tr></tbody></table></figure>
 
 <p>总而言之， <strong>当多个线程共享可变数据的时候，每个读或者写数据的线程都必须执行同步。</strong></p>
+<h5 id="7，要注意程序计算溢出"><a href="#7，要注意程序计算溢出" class="headerlink" title="7，要注意程序计算溢出"></a>7，要注意程序计算溢出</h5><p>比如下面这个代码</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Add</span> </span>{</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</span><br><span class="line"></span><br><span class="line">		<span class="keyword">int</span> num1 = Integer.MAX_VALUE;</span><br><span class="line">		<span class="keyword">int</span> num2 = Integer.MAX_VALUE;</span><br><span class="line">		System.out.println(num1+num2);</span><br><span class="line"></span><br><span class="line">	}</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>它的输出结果是<code>-2</code>，发生溢出后，既没有抛出异常，也没有任何提示。所以我们在写<strong>计算</strong>的时候一定要注意。</p>
+<p>再比如下面这个计算：</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Add</span> </span>{</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</span><br><span class="line"></span><br><span class="line">		<span class="keyword">long</span> l = <span class="number">5</span> * <span class="number">2147483647</span>;</span><br><span class="line">		<span class="keyword">long</span> m = (<span class="keyword">long</span>) <span class="number">5</span> * <span class="number">2147483647</span>;</span><br><span class="line">		System.out.println(l);<span class="comment">//输出：2147483643</span></span><br><span class="line">		System.out.println(m);<span class="comment">//输出：10737418235</span></span><br><span class="line"></span><br><span class="line">	}</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h5 id="8，注意finally和return的关系"><a href="#8，注意finally和return的关系" class="headerlink" title="8，注意finally和return的关系"></a>8，注意finally和return的关系</h5><p>在try-finally语法中，我们都知道finally是肯定会执行的。那如果try里面有return；finally将会在return前执行。但是对引用类型和值类型的数据修改效果是不一样的。</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">finally1</span><span class="params">()</span></span>{</span><br><span class="line">    <span class="keyword">int</span> num =<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">try</span> {</span><br><span class="line">        <span class="keyword">return</span> num;<span class="comment">//0;</span></span><br><span class="line">    }<span class="keyword">finally</span> {</span><br><span class="line">        num++;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> List&lt;Integer&gt; <span class="title">finally2</span><span class="params">()</span></span>{</span><br><span class="line">    List&lt;Integer&gt; nums =<span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">try</span> {</span><br><span class="line">        <span class="keyword">return</span> nums;<span class="comment">//[1]</span></span><br><span class="line">    }<span class="keyword">finally</span> {</span><br><span class="line">        nums.add(<span class="number">1</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h5 id="9，数值字面量"><a href="#9，数值字面量" class="headerlink" title="9，数值字面量"></a>9，数值字面量</h5><p>当我们程序中有一些大数值的参数时，允许在数字之间插入下划线，方便我们阅读，对数值没有任何影响。</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">100_00_00</span>;</span><br><span class="line"><span class="keyword">float</span> b = <span class="number">1_00f</span>;</span><br><span class="line"><span class="keyword">double</span> c = <span class="number">1_00</span>;</span><br></pre></td></tr></tbody></table></figure>
+
 ]]></content>
       <tags>
         <tag>java</tag>
@@ -2689,6 +2702,102 @@
 
 
 
+]]></content>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>java内存模型</title>
+    <url>/2020/12/24/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/</url>
+    <content><![CDATA[<p>在说java内存模型之前，我们先来聊一聊什么是内存模型，和为什么要有内存模型。</p>
+<p><strong>内存模型（Memory Model）</strong> 是一个计算机概念，在早期普通计算机在工作中，每条指令都是在CPU中执行的，执行过程中呢，又要操作数据，而数据是保存在内存中的，也就是物理磁盘。随着技术的发展，CPU的执行速度就越来越快，但是内存却一直停滞不前，没啥进展。慢慢的CPU的执行速度和操作内存数据的速度差距就越来越大，这就导致CPU每次操作内存的时候，都要耗费很多时间，所以问题就来了。总不能因为内存慢，就影响我CPU的执行速度吧。</p>
+<p>所以缓存就出现了，缓存出现后，之前的操作就由了从内存操作数据，变成了先从内存中复制一份数据到缓存，在缓存中操作数据，然后缓存再写会内存。随着CPU的能力越来越强，一级缓存慢慢的也没法满足CPU的需求了，慢慢的二级缓存，三级缓存都出现了。操作流程就变成了从一级缓存读写，发现一级缓存中没有再从二级缓存中读写，如果还没有再从三级缓存中或者直接从内存中读写。</p>
+<p>但是CPU的发展越来越快，从之前的单核慢慢变成了多核，也同时带来了多线程。</p>
+<p>原来的单核CPU，只有一套缓存，现在多核了，每个核都有一套缓存。</p>
+<p>单核CPU中，多个线程都同时访问共享数据，虽然会发生线程切换，但是依然操作的是同一个缓存。</p>
+<p>多核CPU中，每个核都有一套缓存，多线程这时候访问，就有可能会在多个核上来回切换了，这时候就会出现每个核中的缓存数据不一致。</p>
+<p>由此引发了一个新的问题，<strong>缓存一致性</strong>，除了这个明显的问题以外，还有一些处理器之间的问题，比如为了提高效率，处理器会对输入指令进行<strong>处理器优化</strong>来保证运算单元能够充分被使用，同时还可能会对代码进行<strong>指令重排</strong>来达到最优的执行效果，这些看似友好的优化，对于多线程并发来说，处理不好，就会带来致命的问题。</p>
+<p>所以为了解决这一系列的问题，内存模型就诞生了。</p>
+<p>内存模型很显然是一种解决方案，在一开始，是通过对总线进行加锁的方式实现的（LOCK#），即保证同时只有一个CPU能够使用，其他的都处于等待状态，这种做法很显然不符合CPU的发展，是一种倒退方式。</p>
+<p>另一个方案就是<strong>缓存一致性协议（Cache Coherence Protocol）</strong>，其中以Intel 的MESI协议最为出名，它的主要实现原理就是，当CPU在操作数据的时候，发现数据是公共数据（共享数据），它会发出信号，通知其他的CPU将自己缓存的数据置为无效，然后当其他CPU在读取数据后，发现数据状态为无效，就会从内存中重新读取。</p>
+<p>缓存行有4种不同的状态:</p>
+<ul>
+<li><p>已修改Modified (M)</p>
+<p>缓存行是脏的（<em>dirty</em>），与主存的值不同。如果别的CPU内核要读主存这块数据，该缓存行必须回写到主存，状态变为共享(S).</p>
+</li>
+<li><p>独占Exclusive (E)</p>
+<p>缓存行只在当前缓存中，但是干净的（clean）–缓存数据同于主存数据。当别的缓存读取它时，状态变为共享；当前写数据时，变为已修改状态。</p>
+</li>
+<li><p>共享Shared (S)</p>
+<p>缓存行也存在于其它缓存中且是干净的。缓存行可以在任意时刻抛弃。</p>
+</li>
+<li><p>无效Invalid (I)</p>
+<p>缓存行是无效的</p>
+</li>
+</ul>
+<p>对上面出现的缓存问题，我们可以总结出三个特性：原子性，可见性，有序性。</p>
+<ul>
+<li><strong>原子性：</strong>CPU在一个操作中，不可中断，要么都执行，要么都不执行。</li>
+<li><strong>可见性：</strong>当一个线程修改了某个共享变量的时候，其他线程都能看见最新的值。</li>
+<li><strong>有序性：</strong>程序要按照代码的先后顺序来执行。</li>
+</ul>
+<p>内存模型是多线程下的重要规范，对于java语言来说，其实现方式即<strong>java内存模型（Java Memory Model ,JMM）</strong>，感兴趣的可以看看<a href="http://www.cs.umd.edu/~pugh/java/memoryModel/jsr133.pdf%E3%80%82">http://www.cs.umd.edu/~pugh/java/memoryModel/jsr133.pdf。</a></p>
+<h5 id="内存之间的交互操作："><a href="#内存之间的交互操作：" class="headerlink" title="内存之间的交互操作："></a>内存之间的交互操作：</h5><p>一个变量是如何从主内存拷贝到工作内存（这里我们可以类比计算器的内存和缓存），又是如何从工作内存同步到主内存，java内存模型定义了以下8种操作。</p>
+<ul>
+<li><p><strong>lock（锁定）：</strong>作用于主内存的变量，它把一个变量标识为一条线程独占的状态。 </p>
+</li>
+<li><p><strong>unlock（解锁）：</strong>作用于主内存的变量，它把一个处于锁定状态的变量释放出来，释放后的变量才可以被其他线程锁定。 </p>
+</li>
+<li><p><strong>read（读取）：</strong>作用于主内存的变量，它把一个变量的值从主内存传输到线程的工作内存中，以便随后的load动作使用。 </p>
+</li>
+<li><p><strong>load（载入）：</strong>作用于工作内存的变量，它把read操作从主内存中得到的变量值放入工作内存的变量副本中。 </p>
+</li>
+<li><p><strong>use（使用）：</strong>作用于工作内存的变量，它把工作内存中一个变量的值传递给执行引擎，每当虚拟机遇到一个需要使用变量的值的字节码指令时将会执行这个操作。</p>
+</li>
+<li><p><strong>assign（赋值）：</strong>作用于工作内存的变量，它把一个从执行引擎接收的值赋给工作内存的变量， 每当虚拟机遇到一个给变量赋值的字节码指令时执行这个操作。</p>
+</li>
+<li><p><strong>store（存储）：</strong>作用于工作内存的变量，它把工作内存中一个变量的值传送到主内存中，以便随 后的write操作使用。 </p>
+</li>
+<li><p><strong>write（写入）：</strong>作用于主内存的变量，它把store操作从工作内存中得到的变量的值放入主内存的变量中。</p>
+</li>
+</ul>
+<p>从主内存拷贝数据到工作内存，即执行read和load操作，从工作内存同步回主存，即执行stroe和write操作。注意，java内存模型要求这两个操作必须按顺序执行，但是不要求是连续的，即中间可以穿插别的操作。比如对主存中的变量a和b进行拷贝时，可能会出现read a，read b，load a，load b。此外java内存模型还对这8种操作制定了相应的规则：</p>
+<ul>
+<li><p>不允许read和load、store和write操作之一单独出现，即不允许一个变量从主内存读取了但工作内存不接受，或者工作内存发起回写了但主内存不接受的情况出现。</p>
+</li>
+<li><p>不允许一个线程丢弃它最近的assign操作，即变量在工作内存中改变了之后必须把该变化同步回主内存。</p>
+</li>
+<li><p>不允许一个线程无原因地（没有发生过任何assign操作）把数据从线程的工作内存同步回主内存中。</p>
+</li>
+<li><p>一个新的变量只能在主内存中“诞生”，不允许在工作内存中直接使用一个未被初始化（load或 assign）的变量，换句话说就是对一个变量实施use、store操作之前，必须先执行assign和load操作。</p>
+</li>
+<li><p>一个变量在同一个时刻只允许一条线程对其进行lock操作，但lock操作可以被同一条线程重复执行多次，多次执行lock后，只有执行相同次数的unlock操作，变量才会被解锁。</p>
+</li>
+<li><p>如果对一个变量执行lock操作，那将会清空工作内存中此变量的值，在执行引擎使用这个变量前，需要重新执行load或assign操作以初始化变量的值。</p>
+</li>
+<li><p>如果一个变量事先没有被lock操作锁定，那就不允许对它执行unlock操作，也不允许去unlock一个被其他线程锁定的变量。</p>
+</li>
+<li><p>对一个变量执行unlock操作之前，必须先把此变量同步回主内存中（执行store、write操作）。</p>
+</li>
+</ul>
+<p>这种定义非常严谨，但是也很烦琐，操作起来也很麻烦。往往会让我们产生恐惧感，后来java设计团队大概也意识到了这个问题，将java内存模型的操作简化为了read，write，lock和unlock这四种，这种简化只是描述上的简化，基础设计却未改变。</p>
+<p>从上面的read、load、assign、use、store和write原子操作来看，我们大致可以认为基本数据类型的访问和读写都是具备原子性的。如果还需要更大范围的原子性，还有lock和unlock，但是java虚拟机并未把这两个操作提供给我们，却提供了更 高层次的字节码指令<code>monitorenter</code>和<code>monitorexit</code>来隐式地使用这两个操作。这两个操作即java中的同步块关键字—<code>synchronized</code>。由此我们可以知道，**<code>synchronized</code><strong>关键字是具备</strong>原子性（Atomicity）**的。</p>
+<p>根据java内存模型对原子操作指定的规则中的最后一条“对一个变量执行unlock操作之前，必须先把此变量同步回主内存中（执行store、write操作）”。<code>synchronized</code>还具备了<strong>可见性（Visibility）</strong>，同时java还提供了两个具备可见性的关键字<code>volatile</code>和<code>final</code>。volatile关键字通过对变量记录版本号，如果变量发生变化，将变量值和版本号同步回主存，其他线程在访问变量时发现版本号不一致，即放弃当前工作内存的拷贝，从主存直接获取。由于java的运算符操作是非原子性的，这也导致了volatile在运算状态下是线程不安全的，其不具备原子性。而final关键字的实现方式是：被final修饰的字段在构造器中一旦被初始化完成，并且构造器没有把“this”的引用传递出去（this引用逃逸是一件很危险的事情，其他线程有可能通过这个引用访问到“初始化了一半”的对象），那么在其他线程中就能看见final字段的值。</p>
+<p>根据“一个变量在同一个时刻只允许一条线程对其进行lock操作，但lock操作可以被同一条线程重复执行多次，多次执行lock后，只有执行相同次数的unlock操作，变量才会被解锁。”这条规则，synchronized还保证了<strong>有序性（Ordering）</strong>，其对变量进行加锁后，其他线程再无法访问该变量，直到获取到锁。这条规则说的很明确，lock操作也可以被同一条线程重复多次。比如下面这个示例：</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">aaa</span><span class="params">()</span></span>{</span><br><span class="line">    System.out.println(<span class="string">"aaa"</span>);</span><br><span class="line">    <span class="keyword">this</span>.bbb();</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">bbb</span><span class="params">()</span></span>{</span><br><span class="line">    System.out.println(<span class="string">"bbb"</span>);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>根据这条规则，线程在获取到锁之后， 先执行了aaa，然后执行bbb的时候又要获取锁，此时如果线程无法获取bbb锁，就会造成死锁。所以synchronized还是一个可重入锁。其执行原理是：被锁的对象有一个计数器，当线程获取到锁的时候，计数器+1，同一线程再次获取锁的时候，计数器再+1，释放的时候再做自减操作，当计数器为0时，表示锁释放，其他线程就可以获得锁进行操作。除了synchronize外，volatile关键字也具备有序性。其实现原理是：volatile会对修饰的变量加一个内存屏障，指令重排时，无法将后面的指令重排到内存屏障之前，由此来保证有序性。</p>
+<p>通过上面的分析，我们发现synchronized关键字好像是万能的，并发操作都可以用这个关键字来搞定，这也间接的导致了他被大量滥用的现象。而这种滥用也引发了更大了隐患。JDK6之后，synchronized已被大量优化，性能已和ReentrantLock持平，其性能问题已不再是我们是否选择它的主要因素，但是除了性能以外，synchronized还具有一些我们目前无法控制它的因素：</p>
+<ul>
+<li>它是个非公平锁，其获取锁的先后无法控制，很有可能一个线程等待了很久也无法获取到锁，而一个新的线程刚进来就获取到了锁；</li>
+<li>它无法等待可中断，即无法强制已获取锁的线程释放锁，也无法强制正在等待锁的线程中断等待或超时退出；</li>
+<li>无法设置锁超时时间，无条件执行；</li>
+<li>锁释放条件不足，其只有正常执行完或者抛出异常才会主动释放锁；</li>
+<li>其切换锁状态是在内核中完成，状态切换要消化大量处理器资源，是一个重量级锁；</li>
+<li>….</li>
+</ul>
+<p>其诟病层出不穷，似乎在实际应用中很难有立身之地。实际上，synchronized也有其特点，比如语法简单，使用者无需考虑手动释放锁，对于一些合适的场景，synchronized的使用要比Lock方便好理解的多。</p>
 ]]></content>
       <tags>
         <tag>java</tag>
